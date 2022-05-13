@@ -8,9 +8,12 @@ import models.ReimbursementType;
 import models.Role;
 import models.Status;
 import models.User;
-
 public class CLI_Menu_Service {	
 
+
+	AuthService method = new AuthService();
+	
+	
 	ReimbursementService rService = new ReimbursementService();
 //////////////////////////////////////////////////////////////////////////////////////////
 	Scanner scan = new Scanner(System.in);
@@ -60,80 +63,125 @@ public double parseDoubleInput(String input) {
 ///////////////////////////////////////////////////////////////////////////////
 public void displayMenu() {
 
-boolean menuOptions = true;	
+	boolean menuOptions = true;	
+	
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println("~~ Welcome to Revature's Reinbursement Entry System ~~~~");
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println();
 
-System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-System.out.println("~~ Welcome to Revature's Reinbursement Entry System ~~~~");
-System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-System.out.println();
 
+	while(menuOptions) {
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println("~~~~~~ Select your reinbursement type below ~~~~~~~~~~~~~~");
+		System.out.println("~~ Input the number for your desired selection ~~~~~~~~~~~");
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");		
+		System.out.println("1: EMPLOYEE PORTAL");
+		System.out.println("2: FINANCE MANAGER PORTAL");
+		System.out.println("3: REGISTER");
+		System.out.println("4: LOGIN");
+		System.out.println("0: EXIT Application");
+		System.out.println();
 
-while(menuOptions) {
-System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-System.out.println("~~~~~~ Select your reinbursement type below ~~~~~~~~~~~~~~");
-System.out.println("~~ Input the number for your desired selection ~~~~~~~~~~~");
-System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");		
-System.out.println("1: EMPLOYEE PORTAL");
-System.out.println("2: FINANCE MANAGER PORTAL");
-System.out.println("0: EXIT Application");
-System.out.println();
-
-int firstChoice = promptSelection(1,2,0);
-
-switch(firstChoice) {
-
-case 1:
-handlePortal(Role.Employee);
-break;
-case 2:
-handlePortal(Role.Manager);
-break;
-case 0:
-System.out.println("\nEnjoy your day! Goodbye!");
-menuOptions = false;
-break;
-}	
-}
+	int firstChoice = promptSelection(1,2,0);
+		
+	switch(firstChoice) {
+		
+		case 1:
+		displayEmployeeMenu(null);
+		break;
+		case 2:
+		displayFinanceManagerMenu(null);
+		break;
+		case 3:
+		method.register(null);
+			break;
+		case 4:
+		method.login(null, null);
+			break;
+		case 0:
+		System.out.println("\nEnjoy your day! Goodbye!");
+		menuOptions = false;
+		break;
+		}	
+	}
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-public void handlePortal (Role role) {
-	
-	List<User> users = UserService.getByRoles(role);
-	
-	int[] ids = new int[users.size() +1];
-	ids[users.size()] = 0;
-	for (int i = 0; i < users.size(); i++) {
-		ids[i] = users.get(i).getId();
-	}
-
-	//Ask for employee ID number to continue
-	System.out.println("-------------------------------------------------------");
-	System.out.println("PLEASE ENTER THE NUMBER OF YOUR CHOICE");
-	
-	
-	for (User u: users) {
-		System.out.println(u.getId() + " -> " + u.getUserName);
-	}
-	System.out.println("0 -> Return to Main Menu");
-	System.out.println();
-	
-	int userChoice = promptSelection(ids);
-	
-	if (userChoice == 0) {
-		return;
-	}
-	User employee = UserService.getUserById(userChoice);
-	
-	if (role == Role.Manager) {
-		System.out.println("Opening Manager Portal for " + employee.getUsername());
-		displayFinanceManagerMenu(employee);
-	} else {
-		System.out.println("Opening Employee Portal for " + employee.getUsername());
-		displayEmployeeMenu(employee);
-	}
-}	
+//public void handlePortal (Role employee) {
+//	
+//	List<User> users = UserService.getByRoles(employee);
+//	
+//	int[] ids = new int[users.size() +1];
+//	ids[users.size()] = 0;
+//	for (int i = 0; i < users.size(); i++) {
+//		ids[i] = users.get(i).getId();
+//	}
+//
+//	//Ask for employee ID number to continue
+//	System.out.println("-------------------------------------------------------");
+//	System.out.println("PLEASE ENTER THE NUMBER OF YOUR CHOICE");
+//	
+//	
+//	for (User u: users) {
+//		System.out.println(u.getId() + " -> " + u.getUserName);
+//	}
+//	System.out.println("0 -> Return to Main Menu");
+//	System.out.println();
+//	
+//	int userChoice = promptSelection(ids);
+//	
+//	if (userChoice == 0) {
+//		return;
+//	}
+//	User employee = UserService.getUserById(userChoice);
+//	
+//	if (employee == Role.Manager) {
+//		System.out.println("Opening Manager Portal for " + employee.getUsername());
+//		displayFinanceManagerMenu(employee);
+//	} else {
+//		System.out.println("Opening Employee Portal for " + employee.getUsername());
+//		displayEmployeeMenu(employee);
+//	}
+//}	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//public void handlePortal1 (Role Manager) {
+//	
+//	List<User> users = UserService.getByRoles(Manager);
+//	
+//	int[] ids = new int[users.size() +1];
+//	ids[users.size()] = 0;
+//	for (int i = 0; i < users.size(); i++) {
+//		ids[i] = users.get(i).getId();
+//	}
+//
+//	//Ask for employee ID number to continue
+//	System.out.println("-------------------------------------------------------");
+//	System.out.println("PLEASE ENTER THE NUMBER OF YOUR CHOICE");
+//	
+//	
+//	for (User u: users) {
+//		System.out.println(u.getId() + " -> " + u.getUserName);
+//	}
+//	System.out.println("0 -> Return to Main Menu");
+//	System.out.println();
+//	
+//	int userChoice = promptSelection(ids);
+//	
+//	if (userChoice == 0) {
+//		return;
+//	}
+//	User employee = UserService.getUserById(userChoice);
+//	
+//	if (role == Role.Manager) {
+//		System.out.println("Opening Manager Portal for " + employee.getUsername());
+//		displayFinanceManagerMenu(employee);
+//	} else {
+//		System.out.println("Opening Employee Portal for " + employee.getUsername());
+//		displayEmployeeMenu(employee);
+//	}
+//}	
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -212,6 +260,7 @@ public void submitReimbursement(User employee) {
 	Reimbursement reimbursementToBeSubmitted = new Reimbursement(0, 0, 0, null, null, null, 0);
 	reimbursementToBeSubmitted.setAuthor(employee.getId());
 	
+	System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 	System.out.println("What type of reimbursement would you like to submit?");
 	System.out.println("PLEASE ENTER THE NUMBER OF YOUR CHOICE");
 	System.out.println("1 -> Lodging");
@@ -364,17 +413,25 @@ public void processReimbursement(User manager) {
 	}
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-public void Login() {
+//public void Login() {
+//	    Scanner scan = new Scanner (System.in);
+//	    Scanner keyboard = new Scanner (System.in);
+//	    String user = scan.nextLine();
+//	    String pass = scan.nextLine(); // looks at selected file in scan
+//
+//	    String inpUser = keyboard.nextLine();
+//	    String inpPass = keyboard.nextLine(); // gets input from user
+//
+//	    if (inpUser.equals(user) && inpPass.equals(pass)) {
+//	        System.out.print("your login message");
+//	    } else {
+//	        System.out.print("There Was an error");
+//	        return;
+//	    }
+//	} 
 	
-	
-}
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-public void Register() {
 	
-	
-}
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-		
 }

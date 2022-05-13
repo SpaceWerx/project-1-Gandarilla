@@ -7,7 +7,8 @@ public class User {
 	String password;
 	Role role;
 	public int getUserName;
-	public User(int i, String string, String string2, Role employee) {
+	public User(int i, String string, String string2, Role Employee ) {
+		// TODO Auto-generated constructor stub
 		// TODO Auto-generated constructor stub
 	}
 	public int getId() {

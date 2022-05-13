@@ -12,8 +12,8 @@ import models.Role;
 
 public class ReimbursementService {
 
-		ReimbursementDAO reimbursementDAO = new ReimbursementDAO();
-		UserService userService = new UserService();
+		public ReimbursementDAO reimbursementDAO = new ReimbursementDAO();
+		public UserService userService = new UserService();
 		
 		
 		public List<Reimbursement> getPendingReimbursements() { return reimbursementDAO.getByStatus(Status.Pending);}
@@ -34,7 +34,7 @@ public class ReimbursementService {
 		
 	public int submitReimbursement (Reimbursement reimbursementToBeSubmitted) {
 		
-		User employee = userService.getUserById(reimbursementToBeSubmitted.getAuthor());
+		User employee = getUserService().getUserById(reimbursementToBeSubmitted.getAuthor());
 		
 		if(employee.getRole() != Role.Employee) {
 			
@@ -126,7 +126,7 @@ public class ReimbursementService {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 public Reimbursement update(Reimbursement unprocessedReimbursement, int resolverId, Status updatedStatus) {
 	
-		User manager = userService.getUserById(resolverId);
+		User manager = getUserService().getUserById(resolverId);
 		
 		if(manager.getRole() != Role.Manager) {
 			
@@ -145,6 +145,16 @@ public Reimbursement getReimbursementById(int id) {return ReimbursementDAO.getRe
 	
 public List<Reimbursement> getReimbursementByAuthor(int userId) {
 	return reimbursementDAO.getReimbursementsByUser(userId);
+}
+
+
+public UserService getUserService() {
+	return userService;
+}
+
+
+public void setUserService(UserService userService) {
+	this.userService = userService;
 }
 	
 	}

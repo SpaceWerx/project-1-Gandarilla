@@ -15,6 +15,9 @@ public class Reimbursement {
 			double d) {
 		// TODO Auto-generated constructor stub
 	}
+	public Reimbursement(int i, int id2, String string, ReimbursementType other, models.Status pending, double d) {
+		// TODO Auto-generated constructor stub
+	}
 	public int getId() {
 		return Amount;
 		// TODO Auto-generated method stub

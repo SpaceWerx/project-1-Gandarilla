@@ -7,6 +7,7 @@ public class Driver {
 		
 		CLI_Menu_Service options = new CLI_Menu_Service();
 		options.displayMenu();
+		
 	}
 
 		

@@ -51,7 +51,13 @@ public class UserService {
 		}
 		return null;
 	}
-	
+
+	public void getById(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 	
 }
 

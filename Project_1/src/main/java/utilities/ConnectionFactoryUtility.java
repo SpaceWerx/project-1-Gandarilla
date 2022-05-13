@@ -1,9 +1,10 @@
 package utilities;
 import java.sql.Connection;  
+import java.security.*;
 import java.sql.DriverManager;  
 public class ConnectionFactoryUtility {
 
-	   private static ConnectionFactoryUtility CFU;
+	private static ConnectionFactoryUtility CFU;
 
 	   private ConnectionFactoryUtility(){
 	    }
@@ -23,7 +24,7 @@ public class ConnectionFactoryUtility {
 	    }	
 	
 	
-	public static void main(String args[]) {
+	public static void connection(String args[]) {
 
 	
 	String url;
@@ -40,4 +41,27 @@ public class ConnectionFactoryUtility {
           System.out.println(e.toString());  
       }  
 	}
+	
+	public static void instance(String[] argv){
+        try {
+            // creating the object of Signature and getting instance
+            // By using getInstance() method
+            Signature sr = Signature.getInstance("SHA1WithRSA");
+ 
+            // getting the status of signature object
+            String str = sr.toString();
+ 
+            // printing the status
+            System.out.println("Status : " + str);
+        }
+ 
+        catch (NoSuchAlgorithmException e) {
+ 
+            System.out.println("Exception thrown : " + e);
+        }
+        catch (ProviderException e) {
+ 
+            System.out.println("Exception thrown : " + e);
+        }
+    }
 }

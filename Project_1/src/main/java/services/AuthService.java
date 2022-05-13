@@ -1,6 +1,7 @@
 package services;
 
 import models.User;
+
 import repositories.UserDAO;
 
 public class AuthService {
@@ -48,4 +49,5 @@ public class AuthService {
 		
 		
 	}
+	
 }
