@@ -73,4 +73,10 @@ public class Reimbursement {
 		
 	}
 	
+	
+	public Enum<models.Status> getType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 		}

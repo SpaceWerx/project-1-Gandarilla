@@ -14,4 +14,13 @@ public class UserDAO {
 		return null;
 	}
 
+	public static User getById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public static User getAllUsers(String users) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

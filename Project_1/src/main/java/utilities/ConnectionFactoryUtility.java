@@ -64,4 +64,10 @@ public class ConnectionFactoryUtility {
             System.out.println("Exception thrown : " + e);
         }
     }
+
+
+	public static Connection getConnection() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
