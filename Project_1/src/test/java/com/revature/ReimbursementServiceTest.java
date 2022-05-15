@@ -31,7 +31,7 @@ public class ReimbursementServiceTest {
 private static ReimbursementService reimbursementService;
 private static UserService userService;
 private static ReimbursementDAO reimbursementDAO;
-	
+
 
 private Reimbursement REIMBURSEMENT_TO_PROCESS;
 private List<Reimbursement> mockPendingReimbursements;
@@ -59,10 +59,10 @@ public void setUp() throws Exception {
 	reimbursementService.userService = userService;
 	
 	GENERIC_EMPLOYEE_1 = new User(1, "genericEmployee1", "genericPassword", Role.Employee);
-	setGENERIC_MANAGER_1(new User(1, "genericManager1", "genericPassword", Role.Manager));
+	GENERIC_MANAGER_1 = new User(1, "genericManager1", "genericPassword", Role.Manager);
 	
 	
-	setREIMBURSEMENT_TO_PROCESS(new Reimbursement(2, GENERIC_EMPLOYEE_1.getId(), "Oracle Certification", ReimbursementType.Other, Status.Pending, 150.00));
+	REIMBURSEMENT_TO_PROCESS = new Reimbursement(2, GENERIC_EMPLOYEE_1.getId(), 0, "Oracle Certification", ReimbursementType.Other, Status.Pending, 150.00);
 
 	List<Reimbursement> mockReimbursements = mockReimbursementData.getReimbursements();	
 	mockPendingReimbursements = new ArrayList<>();
@@ -80,14 +80,8 @@ public void setUp() throws Exception {
 		}
 	}
 }
-private void setGENERIC_MANAGER_1(User user) {
-	// TODO Auto-generated method stub
-	
-}
-private void setREIMBURSEMENT_TO_PROCESS(Reimbursement reimbursement) {
-	// TODO Auto-generated method stub
-	
-}
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////
 @Test
 public void testGetResolvedREimbursementsReturnsOnlyApprovedAndDenied() {

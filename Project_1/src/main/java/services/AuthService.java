@@ -6,17 +6,17 @@ import repositories.UserDAO;
 
 public class AuthService {
 
-	public int register(User userToBeRegistered) {
+	public int register(User user) {
 		
-		if(UserDAO.getByUsername(userToBeRegistered.getUsername()) != null) {
+		if(UserDAO.getByUsername(user.getUsername()) != null) {
 			
 			throw new NullPointerException("Username is already taken");
 		}
 	
-		return UserDAO.create(userToBeRegistered);
+		return UserDAO.create(user);
 	}
 	
-//////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public User login(String username, String password) {
 		
@@ -49,5 +49,16 @@ public class AuthService {
 		
 		
 	}
-	
+
+	public static Object login(int anyInt) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Object update(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
+//;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+

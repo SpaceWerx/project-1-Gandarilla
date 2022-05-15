@@ -2,6 +2,7 @@ package models;
 
 public class User {
 	
+	public static final User Employee = null;
 	int Id;
 	String user;
 	String password;
@@ -12,7 +13,7 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 	public int getId() {
-		return 0;
+		return Id;
 	}
 	public Role getRole() {
 		
@@ -21,9 +22,9 @@ public class User {
 	public String getUsername() {
 		return user ;
 	}
-	public Object getPassword() {
+	public String getPassword() {
 		// TODO Auto-generated method stub
-		return null;
+		return password;
 	}
 
 

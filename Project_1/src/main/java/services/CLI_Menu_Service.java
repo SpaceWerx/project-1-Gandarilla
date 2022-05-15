@@ -3,6 +3,10 @@ package services;
 import java.util.List;
 import java.util.Scanner;
 
+
+import services.AuthService;
+import models.EmployeeMenu;
+import models.ManagerMenu;
 import models.Reimbursement;
 import models.ReimbursementType;
 import models.Role;
@@ -11,10 +15,11 @@ import models.User;
 public class CLI_Menu_Service {	
 
 
-	AuthService method = new AuthService();
-	
 	
 	ReimbursementService rService = new ReimbursementService();
+	ManagerMenu mm = new ManagerMenu();
+	EmployeeMenu em = new EmployeeMenu();
+	AuthService au = new AuthService();
 //////////////////////////////////////////////////////////////////////////////////////////
 	Scanner scan = new Scanner(System.in);
 	
@@ -82,24 +87,27 @@ public void displayMenu() {
 		System.out.println("4: LOGIN");
 		System.out.println("0: EXIT Application");
 		System.out.println();
-
-	int firstChoice = promptSelection(1,2,0);
 		
-	switch(firstChoice) {
 		
-		case 1:
-		displayEmployeeMenu(null);
+		
+//	int firstChoice = int.nextLine(1,2,0);
+	String input = scan.nextLine();
+	
+	switch(input) {
+		
+		case "1":
+		em.displayEmployeeMenu();
 		break;
-		case 2:
-		displayFinanceManagerMenu(null);
+		case "2":
+		mm.displayFinanceManagerMenu();
 		break;
-		case 3:
-		method.register(null);
+		case "3":
+		//au.register(null);
 			break;
-		case 4:
-		method.login(null, null);
+		case "4":
+		//au.login(null);
 			break;
-		case 0:
+		case "0":
 		System.out.println("\nEnjoy your day! Goodbye!");
 		menuOptions = false;
 		break;
@@ -185,80 +193,13 @@ public void displayMenu() {
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-public void displayFinanceManagerMenu(User manager) {
-	boolean managerPortal = true;
-	
-	System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-	System.out.println("Welcome to the Manager Portal, " + manager.getUsername());
-	System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-	System.out.println();
-	
-	while(managerPortal) {
-		System.out.println("PLEASE ENTER THE NUMBER OF YOUR CHOICE");
-		System.out.println("1 -> View All Pending Reimbursements");
-		System.out.println("2 -> View All Resolved Reimbursements");
-		System.out.println("3 -> Process a Reimbursement");
-		System.out.println("0 -> Return to Main Menu");
-		
-		int firstChoice = promptSelection(1, 2, 3, 0);
-		
-		
-		switch (firstChoice) {
-		
-			case 1:
-				displayPendingReimbursements();
-				break;
-			case 2:
-				displayResolvedReimbursements();
-				break;
-			case 3:
-				processReimbursement(manager);
-				break;
-			case 0:
-				System.out.println("Returning to Main Menu...");
-				managerPortal = false;
-				break;
-		}
-		
-	}
-	
-}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////
-public void displayEmployeeMenu(User employee) {
-	boolean employeePortal = true;
-	
-	System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-	System.out.println("Welcome to the Employee Portal, " + employee.getUserName);
-	System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-	System.out.println();
-	
-	while (employeePortal) {
-		
-		System.out.println("PLEASE ENTER THE NUMBER OF YOUR CHOICE");
-		System.out.println("1 -> View Previous Requests");
-		System.out.println("2 -> Submit a Reimbursement");
-		System.out.println("0 -> Return to Main Menu");
-		
-		int firstChoice = promptSelection(1, 2, 0);
-		
-			switch (firstChoice) {
-				case 1:
-					displayPreviousRequests(employee);
-					break;
-				case 2:
-					submitReimbursement(employee);
-					break;
-				case 0:
-					System.out.println("Returning to Main Menu...");
-					employeePortal = false;
-					break;
-			}	
-	}
-}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-public void submitReimbursement(User employee) {
+public void submitReimbursement(User Employee) {
 	Reimbursement reimbursementToBeSubmitted = new Reimbursement(0, 0, 0, null, null, null, 0);
-	reimbursementToBeSubmitted.setAuthor(employee.getId());
+	reimbursementToBeSubmitted.setAuthor(Employee.getId());
 	
 	System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 	System.out.println("What type of reimbursement would you like to submit?");
@@ -429,8 +370,6 @@ public void processReimbursement(User manager) {
 //	        return;
 //	    }
 //	} 
-	
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	

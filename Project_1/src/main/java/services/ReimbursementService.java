@@ -34,7 +34,8 @@ public class ReimbursementService {
 		
 	public int submitReimbursement (Reimbursement reimbursementToBeSubmitted) {
 		
-		User employee = getUserService().getUserById(reimbursementToBeSubmitted.getAuthor());
+		getUserService();//DELETE IF NECESSARY
+		User employee = UserService.getUserById(reimbursementToBeSubmitted.getAuthor());
 		
 		if(employee.getRole() != Role.Employee) {
 			

@@ -2,20 +2,20 @@ DROP TABLE IF EXISTS ers_users CASCADE;
 DROP TABLE IF EXISTS ers_reimbursements CASCADE;
 
 
-create type role as enum ('Employee', 'Manager');
-create type type as enum ('Lodging', 'Travel', 'Food','Other');
-create type status as enum ('Pending', 'Approved', 'Denied');
+create type role as ENUM ('Employee', 'Manager');
+create type type as ENUM ('Lodging', 'Travel', 'Food','Other');
+create type status as ENUM ('Pending', 'Approved', 'Denied');
 
 
 
 CREATE TABLE ers_users (
 
-	id SERIAL PRIMARY KEY,
+	ID SERIAL PRIMARY KEY,
 	
 	
-	username VARCHAR (250) UNIQUE NOT NULL,
-	password VARCHAR (250) NOT NULL,
-	role VARCHAR (250) NOT NULL
+	USERNAME VARCHAR (250) UNIQUE NOT NULL,
+	PASSWORD VARCHAR (250) NOT NULL,
+	ROLE VARCHAR (250) NOT NULL
 );
 
 
@@ -38,5 +38,5 @@ CREATE TABLE ers_reimbursements (
 			REFERENCES ers_users(id)
 );
 
-INSERT INTO ers_users (username, password, role)
-VALUES('default', 'guest', 'Employee'),('admin', 'admin', 'Manager');
+INSERT INTO ers_users (USERNAME, PASSWORD, ROLE)
+VALUES('DEFAULT', 'GUEST', 'EMPLOYEE'),('ADMIN', 'ADMIN', 'MANAGER');
