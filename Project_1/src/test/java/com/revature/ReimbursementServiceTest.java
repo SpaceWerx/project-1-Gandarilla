@@ -1,10 +1,11 @@
 package com.revature;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;	
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -51,18 +52,18 @@ public static void setUpBeforeClass() throws Exception {
 public void setUp() throws Exception {
 	
 	userService = mock(UserService.class);
-	
+	reimbursementDAO = mock(ReimbursementDAO.class);
 	
 	MockReimbursementData mockReimbursementData = new MockReimbursementData();
 	
 	reimbursementService.reimbursementDAO = reimbursementDAO;
-	reimbursementService.userService = userService;
+	reimbursementService.rService = userService;
 	
 	GENERIC_EMPLOYEE_1 = new User(1, "genericEmployee1", "genericPassword", Role.Employee);
 	GENERIC_MANAGER_1 = new User(1, "genericManager1", "genericPassword", Role.Manager);
 	
 	
-	REIMBURSEMENT_TO_PROCESS = new Reimbursement(2, GENERIC_EMPLOYEE_1.getId(), 0, "Oracle Certification", ReimbursementType.Other, Status.Pending, 150.00);
+	REIMBURSEMENT_TO_PROCESS = new Reimbursement(2, GENERIC_EMPLOYEE_1.getId(), 1, "Oracle Certification", ReimbursementType.Other, Status.Pending, 150.00);
 
 	List<Reimbursement> mockReimbursements = mockReimbursementData.getReimbursements();	
 	mockPendingReimbursements = new ArrayList<>();
@@ -73,7 +74,7 @@ public void setUp() throws Exception {
 	for(Reimbursement reimbursement : mockReimbursements) {
 		if(reimbursement.getStatus() == Status.Pending) {
 			mockPendingReimbursements.add(reimbursement);
-		}else if (reimbursement.getStatus() == Status.Aproved) {
+		}else if (reimbursement.getStatus() == Status.Approved) {
 			mockApprovedReimbursements.add(reimbursement);
 		}else {
 			mockDeniedReimbursements.add(reimbursement);
@@ -84,9 +85,9 @@ public void setUp() throws Exception {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 @Test
-public void testGetResolvedREimbursementsReturnsOnlyApprovedAndDenied() {
+public void testGetResolvedReimbursementsReturnsOnlyApprovedAndDenied() {
 	
-	when(reimbursementDAO.getByStatus(Status.Aproved)).thenReturn(mockApprovedReimbursements);
+	when(reimbursementDAO.getByStatus(Status.Approved)).thenReturn(mockApprovedReimbursements);
 	when(reimbursementDAO.getByStatus(Status.Denied)).thenReturn(mockDeniedReimbursements);
 	
 	List<Reimbursement> resolvedReimbursements = new ArrayList<>();
@@ -95,7 +96,7 @@ public void testGetResolvedREimbursementsReturnsOnlyApprovedAndDenied() {
 	
 	assertEquals(resolvedReimbursements, reimbursementService.getResolvedReimbursements());
 
-	verify(reimbursementDAO).getByStatus(Status.Aproved);
+	verify(reimbursementDAO).getByStatus(Status.Approved);
 	verify(reimbursementDAO).getByStatus(Status.Denied);
 
 }
@@ -114,41 +115,41 @@ public void testGetPendingReimbursementsReturnsOnlyPending() {
 @Test
 public void testSubmitReimbursementThrowsIllegalArgumentExceptionWhenSubmittedByManager() {
 	
-	when(UserService.getUserById(anyInt())).thenReturn(GENERIC_MANAGER_1);
+	when(userService.getUserById(anyInt())).thenReturn(GENERIC_MANAGER_1);
 	
 	assertThrows(IllegalArgumentException.class,
 			() -> reimbursementService.submitReimbursement(REIMBURSEMENT_TO_PROCESS)
 			
 	);
 	
-	//verify(reimbursementDAO, never()).create(REIMBURSEMENT_TO_PROCESS);
-	verify(userService).getUserById(GENERIC_MANAGER_1.getId());
+	verify(reimbursementDAO, never()).create(REIMBURSEMENT_TO_PROCESS);
+	
+	verify(reimbursementDAO, never()).create(REIMBURSEMENT_TO_PROCESS);
+	verify(userService);
+	userService.getUserById(GENERIC_MANAGER_1.getId());
 
 }
 
-private Object never() {
-	// TODO Auto-generated method stub
-	return null;
-}
 @Test
 public void testUpdateThrowsIllegalArgumentExceptionWhenResolverIsNotManager() {
 	
-	Mockito.when(UserService.getUserById(anyInt())).thenReturn(GENERIC_EMPLOYEE_1);
+	when(userService.getUserById(anyInt())).thenReturn(GENERIC_EMPLOYEE_1);
 	
 	assertThrows(IllegalArgumentException.class,
-						() -> reimbursementService.update(REIMBURSEMENT_TO_PROCESS, GENERIC_EMPLOYEE_1.getId(), Status.Aproved)
+						() -> reimbursementService.update(REIMBURSEMENT_TO_PROCESS, GENERIC_EMPLOYEE_1.getId(), Status.Approved)
 	);
 	
-	//Mockito.verify(reimbursementDAO, never()).update(REIMBURSEMENT_TO_PROCESS);
-	Mockito.verify(userService).getUserById(GENERIC_EMPLOYEE_1.getId());
+    verify(reimbursementDAO, never()).update(REIMBURSEMENT_TO_PROCESS);
+	verify(userService);
+	userService.getUserById(GENERIC_EMPLOYEE_1.getId());
 }
 
 @Test
 public void testReimbursementStatusIsChangedAfterUpdate() {
 	
-	when(UserService.getUserById(anyInt())).thenReturn(GENERIC_MANAGER_1);
+	when(userService.getUserById(anyInt())).thenReturn(GENERIC_MANAGER_1);
 	
-	assertEquals(Status.Aproved, reimbursementService.update(REIMBURSEMENT_TO_PROCESS, GENERIC_MANAGER_1.getId(),Status.Aproved));
+	assertEquals(Status.Approved, reimbursementService.update(REIMBURSEMENT_TO_PROCESS, GENERIC_MANAGER_1.getId(),Status.Approved));
 	
 	verify(userService).getUserById(GENERIC_EMPLOYEE_1.getId());
 	verify(reimbursementDAO).update(REIMBURSEMENT_TO_PROCESS);
@@ -159,11 +160,12 @@ public void testReimbursementStatusIsChangedAfterUpdate() {
 @Test
 public void testResolverIsAssignedAfterReimbursementUpdate() {
 	
-	when(UserService.getUserById(anyInt())).thenReturn(GENERIC_MANAGER_1);
+	when(userService.getUserById(anyInt())).thenReturn(GENERIC_MANAGER_1);
 	
-	assertEquals(GENERIC_MANAGER_1.getId(), reimbursementService.update(REIMBURSEMENT_TO_PROCESS, GENERIC_MANAGER_1.getId(),Status.Aproved).getResolver());
+	assertEquals(GENERIC_MANAGER_1.getId(), reimbursementService.update(REIMBURSEMENT_TO_PROCESS, GENERIC_MANAGER_1.getId(),Status.Approved).getResolver());
 
-	verify(userService).getById(GENERIC_MANAGER_1.getId());
+
+	verify(userService).getUserById(GENERIC_MANAGER_1.getId());
 	verify(reimbursementDAO).update(REIMBURSEMENT_TO_PROCESS);
 }
 

@@ -11,21 +11,6 @@ import services.AuthService;
 public class AuthServiceTest {	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 @Test
 	public void testLoginFailsWhenPasswordIncorrect() {
 		

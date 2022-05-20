@@ -1,6 +1,6 @@
 package repositories;
 
-import java.sql.Connection;
+import java.sql.Connection;	
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -157,7 +157,7 @@ public class ReimbursementDAO {
 		// TODO Auto-generated method stub
 		try (Connection connection = ConnectionFactoryUtility.getConnection()){
 			
-			String sql = "INSERT INTO ers_reinbursments (author, description, type, status, amount)"
+			String sql = "INSERT INTO ers_reimbursements (author, description, type, status, amount)"
 					+ "VALUES (?, ?, ?::type, ?::status, ?)"
 					+ "RETURNING ers_reimbursements.id";
 			

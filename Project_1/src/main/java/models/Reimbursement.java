@@ -2,26 +2,20 @@ package models;
 
 public class Reimbursement {
 	
-	private int ID;
-	private int Author;
-	private ReimbursementType Type;
-	private Status Status;
-	private double Amount;
-	private int Resolver;
-	private String Description;
+	public int ID;
+	public int Author;
+	public ReimbursementType Type;
+	public Status Status;
+	public double Amount;
+	public int Resolver;
+	public String Description;
 	
 	
 public Reimbursement() {
 	super();
 }	
 
-//	public Reimbursement(int id2, int i, int j, String string, ReimbursementType travel, models.Status denied,
-//			double d) {
-//		// TODO Auto-generated constructor stub
-//	}
-//	public Reimbursement(int i, int id2, String string, ReimbursementType other, models.Status pending, double d) {
-//		// TODO Auto-generated constructor stub
-//	}
+
 
 	public Reimbursement(int id, int author, int resolver, String description, ReimbursementType type, Status status, double amount) {
 		super();
@@ -63,7 +57,6 @@ public Reimbursement() {
 		Description = description;
 	}
 	public String getDescription() {
-		// TODO Auto-generated method stub
 		return Description;
 	}
 	
@@ -72,13 +65,11 @@ public Reimbursement() {
 	}
 	
 	public models.Status getStatus() {
-		// TODO Auto-generated method stub
 		return Status;
 	}
 	
 	public double getAmount() {
 		return Amount;
-		// TODO Auto-generated method stub
 		
 	}
 	

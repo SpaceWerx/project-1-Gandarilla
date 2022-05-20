@@ -6,14 +6,14 @@ import repositories.UserDAO;
 
 public class AuthService {
 
-	public int register(User user) {
+	public int register(User userToBeRegistered) {
 		
-		if(UserDAO.getByUsername(user.getUsername()) != null) {
+		if(UserDAO.getByUsername(userToBeRegistered.getUsername()) != null) {
 			
 			throw new NullPointerException("Username is already taken");
 		}
 	
-		return UserDAO.create(user);
+		return UserDAO.create(userToBeRegistered);
 	}
 	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

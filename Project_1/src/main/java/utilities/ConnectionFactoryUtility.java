@@ -1,6 +1,5 @@
 package utilities;
-import java.sql.Connection;  
-import java.security.*;
+import java.sql.Connection;   
 import java.sql.DriverManager;
 import java.sql.SQLException;  
 public class ConnectionFactoryUtility {
@@ -47,7 +46,7 @@ public class ConnectionFactoryUtility {
 	    	//we'll hardcode them for now, but I'll show a way to hide the credentials in environment variables
 	    	
 	    	//the url to my database schema
-	    	String url="ullstack-aws.c9ut2f95g4nt.us-west-1.rds.amazonaws.com"; 
+	    	String url= "jdbc:postgresql://java-fullstack-aws.c9ut2f95g4nt.us-west-1.rds.amazonaws.com:5432/postgres?currentSchema=p1schema";
 	    	//your postgres username (should just be postgres)
 	    	String username = "postgres";
 	    	//your postgres password (hopefully just "password")
