@@ -1,5 +1,6 @@
 package services;
 
+import java.sql.SQLException;		
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +36,8 @@ public class UserService {
 	public List<User> getUserByRole(Role role){
 		List<User> byRole = new ArrayList<>();
 		for(User user : userDAO.getAllUsers()) {
-			if(user.getRole() == role) {
+			if(user.getRole() == role) 
+			{
 				byRole.add(user);
 			}
 		}
@@ -46,7 +48,18 @@ public class UserService {
 	public User getUserById(int id) {
 		return userDAO.getUserbyId(id);
 	}
+//////////////////////////////////////////////////////////////////////////
+	public void addUser(User newEmployee) throws SQLException {
+		
+		//take in the Employee object sent from the menu and send it to the EmployeeDAO to be inserted into the database
+		
+		//call the DAO method that inserts the new Employee
+		userDAO.create(newEmployee);
+	}
 
+	public boolean checkUserExistsById(int id) {
+		return false;
+	}
 
 
 	

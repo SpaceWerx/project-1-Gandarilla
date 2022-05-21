@@ -1,6 +1,6 @@
 package services;
 
-import java.util.List;	
+import java.util.List;		
 
 import java.util.Scanner;
 
@@ -107,7 +107,8 @@ public void handlePortal (Role role) {
 	
 	int[] ids = new int[users.size() +1];
 	ids[users.size()] = 0;
-	for (int i = 0; i < users.size(); i++) {
+	for (int i = 0; i < users.size(); i++) 
+	{
 		ids[i] = users.get(i).getId();
 	}
 

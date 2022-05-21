@@ -6,7 +6,7 @@ import repositories.UserDAO;
 
 public class AuthService {
 
-	public int register(User userToBeRegistered) {
+	public static int register(User userToBeRegistered) {
 		
 		if(UserDAO.getByUsername(userToBeRegistered.getUsername()) != null) {
 			
@@ -18,7 +18,7 @@ public class AuthService {
 	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public User login(String username, String password) {
+	public static User login(String username, String password) {
 		
 		User user;
 		
