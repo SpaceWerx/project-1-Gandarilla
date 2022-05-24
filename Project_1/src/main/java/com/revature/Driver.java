@@ -1,6 +1,6 @@
 package com.revature;
 
-import java.sql.Connection;
+import java.sql.Connection;		
 //import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -43,10 +43,27 @@ public class Driver {
 	
 		app.post("/employee", userController.insertEmployeesHandler);
 		
-	//app.post("/login", null);
+	    app.post("/login", authController.loginHandler);
+	    
+	    app.get("/status", reimbursementController.handleGetReimbursmentByStatus);
+	   
+	}
 
+		
+}
+	
+	
 
 	
-}
-	}
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
 

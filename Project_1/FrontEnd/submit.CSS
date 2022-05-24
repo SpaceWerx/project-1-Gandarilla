@@ -1,0 +1,83 @@
+html,
+body,
+header,
+#main{
+    height: auto;
+}
+
+.navbar{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: azure;
+}
+
+#nav img {
+    max-height: 150px;
+    max-width: 150px;
+}
+
+#bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+
+}
+
+#bg img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    min-width: auto;
+    min-height: auto;
+}
+
+#display {
+    background-color: azure;
+    color: black;
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 50%;
+    padding: 20px;   
+}
+
+#display-title{
+    padding: 25px;
+    text-align: center;
+}
+
+.form-container {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.input-group{
+    padding-bottom: 10px;
+}
+
+#back-anchor {
+    text-decoration: none;
+    color: red;
+}
+
+#back-anchor:hover{
+    color: white;
+}
+
+#logout-anchor {
+    text-decoration: none;
+    color: green;
+}
+
+#logout-anchor:hover{
+    color: azure;
+}

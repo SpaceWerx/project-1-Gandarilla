@@ -1,8 +1,15 @@
 package controller;
 
-import javax.net.ssl.SSLEngineResult.Status;
+import models.Status;
+import repositories.ReimbursementDAO;
+
+import java.util.List;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 import io.javalin.http.Context;
+import io.javalin.http.Handler;
 import io.javalin.http.HttpCode;
 import models.Reimbursement;
 import services.ReimbursementService;
@@ -12,6 +19,7 @@ public class ReimbursementController {
 	ObjectMapper objectMapper = new ObjectMapper();
 	ReimbursementService reimbursementService = new ReimbursementService();
 	UserService userService = new UserService();
+	ReimbursementDAO rDAO = new ReimbursementDAO();
 	public void handleSubmit(Context ctx) {
 	
 		try {
@@ -79,41 +87,80 @@ public class ReimbursementController {
 	} else {
 		ctx.status(HttpCode.FORBIDDEN);
 		ctx.result("Missing Current User Header with ID");
-	} 
+			}
+		}
+	}
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////		
-public void handleGetReimbursements (Context ctx) {
-	if(ctx.queryParam("author") != null) {
-		handleGetReimbursementsByAuthor(ctx);
-	} else if(ctx.queryParam("status") != null) {
-		handleGetReimbursmentByStatus(ctx);
-	}
-}
+public Handler handleGetReimbursements =(ctx) -> {
+		
+		List<Reimbursement> allReim = rDAO.getAllReimbursements();
+		
+		Gson gson = new Gson();
+		String JSONObject = gson.toJson(allReim);
+		
+		ctx.result(JSONObject);
+		ctx.status(200);
+		
+	};
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////
-public void handleGetReimbursmentByStatus(Context ctx) {
+//public void handleGetReimbursmentByStatus(Context ctx) {
+//	
+//	try {
+//		String statusParam = ctx.queryParam("status");
+//		
+//		Status status = Status.valueOf(statusParam);
+//		List<Reimbursement> reim = reimbursementService.getReimbursementByStatus(status); //DELETE IF NECESSARY
+//		//if(status == Status.Pending)
+//		if(reim != null) {
+//			ctx.status(HttpCode.OK);
+//			ctx.json(reimbursementService.getPendingReimbursements());
+//		} else {
+//			ctx.status(HttpCode.OK);
+//			ctx.json(reimbursementService.getResolvedReimbursements());
+//		}
+//	} catch(Exception e) {
+//		ctx.status(HttpCode.INTERNAL_SERVER_ERROR);
+//		
+//		if(!e.getMessage().isEmpty()) {
+//			ctx.result(e.getMessage());
+//		}
+//		e.printStackTrace();
+//	}
+//}
+/////////////////////////////////////////////////////////////////////////////
+
+public Handler handleGetReimbursmentByStatus=(ctx) -> { 
 	
-	try {
-		String statusParam = ctx.queryParam("status");
+
+		String statusParam = ctx.body();
 		
 		Status status = Status.valueOf(statusParam);
+		List<Reimbursement> reim = reimbursementService.getReimbursementByStatus(status); //DELETE IF NECESSARY
+		Gson gson = new Gson();
+		String json = gson.toJson(reim);
 		
-		if(status == Status.Pending) {
+		//if(status == Status.Pending)
+		if(reim != null) {
+			
+			ctx.result(json);
 			ctx.status(HttpCode.OK);
-			ctx.json(reimbursementService.getPendingReimbursements());
+		
+//			ctx.json(reimbursementService.getPendingReimbursements());
 		} else {
 			ctx.status(HttpCode.OK);
-			ctx.json(reimbursementService.getResolvedReimbursements());
+			ctx.result(json);
 		}
-	} catch(Exception e) {
-		ctx.status(HttpCode.INTERNAL_SERVER_ERROR);
-		
-		if(!e.getMessage().isEmpty()) {
-			ctx.result(e.getMessage());
-		}
-		e.printStackTrace();
-	}
-}
-/////////////////////////////////////////////////////////////////////////////
+
+};
+
+
+
+
+
+
 
 public void handleGetReimbursementById(Context ctx) {
 

@@ -1,24 +1,26 @@
 package controller;
 
-import java.util.Objects;
+import java.util.Objects;	
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 import io.javalin.http.Context;
+import io.javalin.http.Handler;
 import io.javalin.http.HttpCode;
 import models.User;
 import services.AuthService;
 
 public class AuthController {
 
-	
-
+ObjectMapper Mapper = new ObjectMapper();
 	public void handleRegister(Context ctx) {
 		
 		try {
 			
 			String input = ctx.body();
 			
-			ObjectMapper mapper = new ObjectMapper();
-			User user = mapper.readValue(input, User.class);
+			User user = Mapper.readValue(input, User.class);
 			
 			int id = AuthService.register(user);
 			
@@ -38,39 +40,31 @@ public class AuthController {
 			
 			e.printStackTrace();
 		}
-	
-	}
+
 ///////////////////////////////////////////////////////////////
-	
-	public void handleLogin(Context ctx) {
-		
-		String username = ctx.formParam("username");
-		String password = ctx.formParam("password");
-		
-		if (Objects.equals(username, "") || Objects.equals(password, "")) {
-			
-			ctx.status(HttpCode.BAD_REQUEST);
-			ctx.result("Invalid Credentials");
-			
-		} else {
-			
-			User user = AuthService.login(username, password);
-			
-			if (user != null) {
-				
-				ctx.status(HttpCode.ACCEPTED);
-				
-				ctx.header("Access-Control-Expose-Headers", "Current-User");
-				
-				ctx.header("Current-User", ""+user.getId());
-				
-				ctx.result(user.getRole().toString());
-			} else {
-				ctx.status(HttpCode.BAD_REQUEST);
-				ctx.result("Invalid Credentials");
-			}
-		}
-		
 	}
+	AuthService as = new AuthService();
+	
+	public Handler loginHandler = (ctx) -> {
+		String body = ctx.body();
+		
+		Gson gson = new Gson();
+		//I recommend you make this an employee object 
+		User u = gson.fromJson(body, User.class);
+
+		if(as.login(u.getUsername(), u.getPassword()) == 1) {
+			ctx.status(201);
+			ctx.result("Manager Login Sucessful!");
+		}
+		else if(as.login(u.getUsername(), u.getPassword()) == 2) {
+			ctx.status(202);
+			ctx.result("Employee Login Sucessful!");
+		}
+		else {
+		ctx.result("Login Failed!");
+		ctx.status(401);
+		}
+	};
+	
 	
 }

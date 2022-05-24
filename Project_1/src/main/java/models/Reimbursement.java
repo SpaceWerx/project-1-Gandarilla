@@ -64,7 +64,7 @@ public Reimbursement() {
 		this.Status = status;
 	}
 	
-	public models.Status getStatus() {
+	public Status getStatus() {
 		return Status;
 	}
 	

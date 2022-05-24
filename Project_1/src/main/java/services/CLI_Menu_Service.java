@@ -394,7 +394,7 @@ public void displayLoginMenu() {
 	   String username = scan.nextLine();
 	   System.out.println("Enter your password");
 	   String password = scan.nextLine();
-	   if (au.login(username, password)!= null) {
+	   if (au.login(username, password)!= 1) {
 		   accountFound = true;
 		   displayMenu();
 		   break;

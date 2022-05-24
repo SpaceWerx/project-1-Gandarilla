@@ -1,5 +1,6 @@
 package services;
 
+import models.Role;
 import models.User;
 
 import repositories.UserDAO;
@@ -18,33 +19,32 @@ public class AuthService {
 	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public static User login(String username, String password) {
+	public static int login(String username, String password) {
 		
-		User user;
+
 		
 		try {
 			
-			user = UserDAO.getByUsername(username);
+			User user = UserDAO.getByUsername(username);
 			
-			if(user!=null && password.equals(user.getPassword())) {
+			if(user!=null && password.equals(user.getPassword()) && user.getRole()== Role.Manager) {
 				
-				System.out.println("Logged In Successfully!");
-				return user;
-			} else if (user!=null && !password.equals(user.getPassword())) {
+				System.out.println("Manager Logged In Successfully!");
+				return 1;
+			} else if (user!=null && password.equals(user.getPassword()) && user.getRole()== Role.Employee) {
 				
-				System.out.println("Wrong Password");
-				return null;
+				System.out.println("Employee Logged In Successfully!");
+				return 2;
 			} else {
 				
-				System.out.println("User Does Not Exist!");
-				return null;
+				System.out.println("Username or Password Does Not Exist!");
+				return 0;
 			}
 		} catch (Exception e) {
 			System.out.println("Login Unsuccessful");
 			e.printStackTrace();
 		}
-		
-		return null;
+		return 0;
 		
 		
 		

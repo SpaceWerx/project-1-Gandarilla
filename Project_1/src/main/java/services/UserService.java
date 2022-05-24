@@ -1,6 +1,6 @@
 package services;
 
-import java.sql.SQLException;		
+import java.sql.SQLException;			
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class UserService {
 	
 
 	
-	public User getUserUsername(String username) {
+	public static User getUserByUsername(String username) {
 		return userDAO.getByUsername(username);
 	}
 //////////////////////////////////////////////////
@@ -45,15 +45,13 @@ public class UserService {
 		return byRole;
 	}
 /////////////////////////////////////////////////////////////////////////
-	public User getUserById(int id) {
+	public static User getUserById(int id) {
 		return userDAO.getUserbyId(id);
 	}
 //////////////////////////////////////////////////////////////////////////
 	public void addUser(User newEmployee) throws SQLException {
 		
-		//take in the Employee object sent from the menu and send it to the EmployeeDAO to be inserted into the database
-		
-		//call the DAO method that inserts the new Employee
+
 		userDAO.create(newEmployee);
 	}
 

@@ -17,7 +17,7 @@ CREATE TABLE ers_reimbursements (
 	id SERIAL PRIMARY KEY,
 	author INT NOT NULL,
 	resolver INT,
-	description TEXT NOT NULL,
+	description VARCHAR(250) NOT NULL,
 	type VARCHAR (250) NOT NULL,
 	status VARCHAR (250) NOT NULL,
 	amount FLOAT NOT NULL,
@@ -29,6 +29,8 @@ CREATE TABLE ers_reimbursements (
 			REFERENCES ers_users(id)
 );
 INSERT INTO ers_users (USERNAME, PASSWORD, ROLE)
-VALUES('DEFAULT', 'GUEST', 'Employee'),('ADMIN', 'ADMIN', 'Manager');
+VALUES('GEST', 'GUEST', 'Employee'),('GENERICUSER1', 'GENERICPASS', 'Employee'),('GENERICUSER2', 'GENERICPASS', 'Employee'),('GENERICUSER3', 'GENERICPASS', 'Employee'),('GENERICMANAGER1', 'GENERICPASS', 'Manager'),('GENERICMANAGER2', 'GENERICPASS', 'Manager'),('GENERICMANAGER3', 'GENERICPASS', 'Manager');
+INSERT INTO ers_reimbursements (author, resolver, description, "type" ,"status" , amount)
+VALUES (1, 3, 'Test', 'LODGING', 'Pending', 200.00);
 
 SELECT * FROM ers_users;

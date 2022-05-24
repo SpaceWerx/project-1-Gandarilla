@@ -37,8 +37,9 @@ public Reimbursement update(Reimbursement unprocessedReimbursement, int resolver
 			
 			return unprocessedReimbursement;
 		}
-		
 }
+			
+		
 	
 	
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -54,12 +55,7 @@ public Reimbursement update(Reimbursement unprocessedReimbursement, int resolver
 			
 			List<Reimbursement> resolvedReimbursements = new ArrayList<>();
 			
-//		for (Reimbursement reimbursement : reimbursements) {
-//			
-//			if (reimbursement.getStatus() == Status.Aproved || reimbursement.getStatus() == Status.Denied) {
-//				resolvedReimbursements.add(reimbursement);
-//				}
-//			}
+
 			resolvedReimbursements.addAll(reimbursementDAO.getByStatus(Status.Approved));
 			resolvedReimbursements.addAll(reimbursementDAO.getByStatus(Status.Denied));
 			return resolvedReimbursements;
@@ -131,5 +127,8 @@ public UserService getUserService() {
 public void setUserService(UserService userService) {
 	this.rService = userService;
 }
-	
+
+public List<Reimbursement> getReimbursementByStatus(Status status){
+		return reimbursementDAO.getByStatus(status);
+}
 	}
