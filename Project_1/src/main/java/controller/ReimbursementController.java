@@ -1,6 +1,6 @@
 package controller;
 
-import models.Status;
+import models.Status;	
 import repositories.ReimbursementDAO;
 
 import java.util.List;
@@ -20,6 +20,8 @@ public class ReimbursementController {
 	ReimbursementService reimbursementService = new ReimbursementService();
 	UserService userService = new UserService();
 	ReimbursementDAO rDAO = new ReimbursementDAO();
+	
+	
 	public void handleSubmit(Context ctx) {
 	
 		try {
@@ -94,6 +96,7 @@ public class ReimbursementController {
 //////////////////////////////////////////////////////////////////////////////////////////////////		
 public Handler handleGetReimbursements =(ctx) -> {
 		
+		
 		List<Reimbursement> allReim = rDAO.getAllReimbursements();
 		
 		Gson gson = new Gson();
@@ -105,32 +108,7 @@ public Handler handleGetReimbursements =(ctx) -> {
 	};
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////
-//public void handleGetReimbursmentByStatus(Context ctx) {
-//	
-//	try {
-//		String statusParam = ctx.queryParam("status");
-//		
-//		Status status = Status.valueOf(statusParam);
-//		List<Reimbursement> reim = reimbursementService.getReimbursementByStatus(status); //DELETE IF NECESSARY
-//		//if(status == Status.Pending)
-//		if(reim != null) {
-//			ctx.status(HttpCode.OK);
-//			ctx.json(reimbursementService.getPendingReimbursements());
-//		} else {
-//			ctx.status(HttpCode.OK);
-//			ctx.json(reimbursementService.getResolvedReimbursements());
-//		}
-//	} catch(Exception e) {
-//		ctx.status(HttpCode.INTERNAL_SERVER_ERROR);
-//		
-//		if(!e.getMessage().isEmpty()) {
-//			ctx.result(e.getMessage());
-//		}
-//		e.printStackTrace();
-//	}
-//}
-/////////////////////////////////////////////////////////////////////////////
+
 
 public Handler handleGetReimbursmentByStatus=(ctx) -> { 
 	
@@ -154,6 +132,77 @@ public Handler handleGetReimbursmentByStatus=(ctx) -> {
 			ctx.result(json);
 		}
 
+};
+public Handler handleGetReimbursementByAuthor = (ctx) ->{
+	int id = Integer.parseInt(ctx.pathParam("author"));
+//	String authParam = ctx.queryParam("author");
+	System.out.println(id);
+//	int id = Integer.parseInt(authParam);
+//	Status status = Status.valueOf(authParam);
+	
+	List<Reimbursement> reimId = ReimbursementService.getReimbursementByAuthor(id);
+	
+	Gson gson = new Gson();
+	String JSONObject = gson.toJson(reimId);
+	
+	ctx.status(HttpCode.OK);
+	ctx.result(JSONObject);
+};
+
+public Handler handleProcess = (ctx) ->{
+	String authHeader = ctx.header("Current-User");
+	
+	if(authHeader != null) {
+		
+		int userId = Integer.parseInt(authHeader);
+		
+		String reimbursementIdInput = ctx.pathParam("id");
+		
+		int id = Integer.parseInt(reimbursementIdInput);
+		
+		String statusInput = ctx.formParam("status");
+		
+		Reimbursement reimbursement = ReimbursementService.getReimbursementById(id);
+		
+		if(reimbursement != null) {
+			
+			Reimbursement processedReimbursement = ReimbursementService.update(reimbursement, id, Status.valueOf(statusInput));
+			
+			ctx.status(HttpCode.ACCEPTED);
+			ctx.json(processedReimbursement);
+		} else {
+			ctx.status(HttpCode.ACCEPTED);
+			ctx.result("Reimbursement processing was not successful");
+		}
+	}
+};
+public Handler handleSubmit = (ctx) ->{
+	
+		Reimbursement reimbursement = new Reimbursement();
+		
+		int id = ReimbursementService.submitReimbursement(reimbursement);
+		
+		if(id !=0) {
+			ctx.status(HttpCode.CREATED);
+			ctx.result("" + id);
+		} else {
+			ctx.status(HttpCode.BAD_REQUEST);
+			ctx.result("Reimbursement submission was unsuccessful");
+		}
+	
+};
+
+
+public Handler handleGetReimbursementById = (ctx) ->{
+	
+	int id = Integer.parseInt(ctx.pathParam("id"));
+	Reimbursement reimId = ReimbursementService.getReimbursementById(id);
+	
+	Gson gson = new Gson();
+	String JSONObject = gson.toJson(reimId);
+	
+	ctx.result(JSONObject);
+	ctx.status(200);
 };
 
 

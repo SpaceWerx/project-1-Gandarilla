@@ -1,6 +1,6 @@
 package repositories;
 
-import java.sql.Connection;		
+import java.sql.Connection;				
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -195,7 +195,7 @@ public class ReimbursementDAO {
 			
 		List<Reimbursement> reimbursements = new ArrayList<>();
 		
-			String sql = "select * from ers_reimbursements where author = ?";
+			String sql = "select * from ers_reimbursements";
 			
 			Statement statement = connection.createStatement();
 			

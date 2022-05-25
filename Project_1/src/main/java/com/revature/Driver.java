@@ -1,6 +1,6 @@
 package com.revature;
 
-import java.sql.Connection;		
+import java.sql.Connection;			
 //import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -15,9 +15,9 @@ import utilities.ConnectionFactoryUtility;
 
 public class Driver {
 	public static void main(String[] args) {
-		AuthController authController = new AuthController();
-		UserController userController = new UserController();
-		ReimbursementController reimbursementController = new ReimbursementController();
+		AuthController ac = new AuthController();
+		UserController uc = new UserController();
+		ReimbursementController rc = new ReimbursementController();
 		//DELETE IF NECESSARY
 	try(Connection conn = ConnectionFactoryUtility.getConnection()){
 		System.out.println("Connection Successful!");
@@ -31,7 +31,7 @@ public class Driver {
 //		options.displayLoginMenu();
 //		options.displayMenu();
 	
-
+	
 	//LEAVE IT JUST IN CASE
 	Javalin app = Javalin.create(
 		config -> {
@@ -39,13 +39,23 @@ public class Driver {
 		}	
 			).start(3000);
 	
-		app.get("/employee", userController.getEmployeesHandler);
+		app.get("/employee", uc.getEmployeesHandler);
 	
-		app.post("/employee", userController.insertEmployeesHandler);
+		app.post("/employee", uc.insertEmployeesHandler);
 		
-	    app.post("/login", authController.loginHandler);
+	    app.post("/login", ac.loginHandler); 
 	    
-	    app.get("/status", reimbursementController.handleGetReimbursmentByStatus);
+	    app.get("/status", rc.handleGetReimbursmentByStatus);
+	   
+	    app.get("/reimbursement", rc.handleGetReimbursements);
+	    
+	    app.get("/reimbursement/{id}", rc.handleGetReimbursementById);
+	    
+	    app.post("/submit", rc.handleSubmit);
+	    
+	    app.post("/process", rc.handleProcess);
+	    
+	    app.get("/author/{author}", rc.handleGetReimbursementByAuthor);
 	   
 	}
 

@@ -25,7 +25,7 @@ header,
 }
 
 #bg img {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -42,10 +42,10 @@ header,
     position: absolute;
     top: 50%;
     left: 505;
-    transform: translate(50%, 20%);
+    transform: translate(50%, auto);
     z-index: 2;
-    width: 80%;
-    padding: 20px;
+    width: 100%;
+    padding: 50px;
 }
 
 #display-title {

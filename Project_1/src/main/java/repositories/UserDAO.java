@@ -1,6 +1,6 @@
 package repositories;
 
-import java.sql.Connection;				
+import java.sql.Connection;					
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -76,15 +76,15 @@ try(Connection connection = ConnectionFactoryUtility.getConnection()){
 try(Connection connection = ConnectionFactoryUtility.getConnection()){
 			
 			String sql = "INSERT INTO ers_users (id, username, password, role)"
-					+ "VALUES (?, ?, ?::role)"
+					+ "VALUES ( default, ?, ?, ?::role)"
 					+ "RETURNING ers_users.id";
 			
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			
-			preparedStatement.setInt(1, user.getId());
-			preparedStatement.setString(2, user.getUsername());
-			preparedStatement.setString(3, user.getPassword());
-			preparedStatement.setObject(4, user.getRole().name());
+			System.out.println(user.getUsername());
+		
+			preparedStatement.setString(1, user.getUsername());
+			preparedStatement.setString(2, user.getPassword());
+			preparedStatement.setObject(3, user.getRole().name());
 			
 			ResultSet resultSet;
 			

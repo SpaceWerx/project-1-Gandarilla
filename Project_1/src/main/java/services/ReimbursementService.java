@@ -1,6 +1,6 @@
 package services;
 
-import models.Status;		
+import models.Status;			
 import models.User;
 import repositories.ReimbursementDAO;
 import repositories.UserDAO;
@@ -14,15 +14,15 @@ import models.Role;
 
 public class ReimbursementService {
 
-		public ReimbursementDAO reimbursementDAO = new ReimbursementDAO();
-		public UserService rService = new UserService();
-		public static List<MockReimbursementData> mockData = new ArrayList<>();
+		public static ReimbursementDAO reimbursementDAO = new ReimbursementDAO();
+		public static UserService rService = new UserService();
 		public static ArrayList<Reimbursement> reimbursements = new ArrayList<>();	
 		public static void clearData() {	
 			reimbursements.clear();
 		}
 
-public Reimbursement update(Reimbursement unprocessedReimbursement, int resolverId, Status updatedStatus) {	
+
+public static Reimbursement update(Reimbursement unprocessedReimbursement, int resolverId, Status updatedStatus) {	
 
 		User manager = rService.getUserById(resolverId);
 		
@@ -45,7 +45,7 @@ public Reimbursement update(Reimbursement unprocessedReimbursement, int resolver
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		
-		public List<Reimbursement> getPendingReimbursements() { 
+		public static List<Reimbursement> getPendingReimbursements() { 
 
 			return reimbursementDAO.getByStatus(Status.Pending);
 }
@@ -65,22 +65,19 @@ public Reimbursement update(Reimbursement unprocessedReimbursement, int resolver
 	
 /////////////////////////////////////////////////////////////////////////////		
 		
-	public int submitReimbursement (Reimbursement reimbursementToBeSubmitted) {
+	public static int submitReimbursement (Reimbursement reimbursementToBeSubmitted) {
 		
 
 	
 		User employee = rService.getUserById(reimbursementToBeSubmitted.getAuthor());
 	
-		if(employee.getRole() != Role.Employee) {
-			
-			throw new IllegalArgumentException("Managers cannot submit reimbursement requests.");
-		} else {
+		
 			reimbursementToBeSubmitted.setStatus(Status.Pending);
 			
 	
 			return reimbursementDAO.create(reimbursementToBeSubmitted);
-	}
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public List<Reimbursement> getReimbursementsByAuthor(int userId) {
@@ -112,9 +109,11 @@ public Reimbursement updateManager(Reimbursement unprocessedReimbursement, int r
 		}
 }
 ////////////////////////////////////////
-public Reimbursement getReimbursementById(int id) {return ReimbursementDAO.getReimbursementById(id);}
+public static Reimbursement getReimbursementById(int id) {
+	return ReimbursementDAO.getReimbursementById(id);
+	}
 	
-public List<Reimbursement> getReimbursementByAuthor(int userId) {
+public static List<Reimbursement> getReimbursementByAuthor(int userId) {
 	return reimbursementDAO.getReimbursementsByUser(userId);
 }
 
@@ -128,7 +127,11 @@ public void setUserService(UserService userService) {
 	this.rService = userService;
 }
 
+
 public List<Reimbursement> getReimbursementByStatus(Status status){
 		return reimbursementDAO.getByStatus(status);
+} 
+
 }
-	}
+
+
