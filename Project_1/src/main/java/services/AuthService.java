@@ -38,7 +38,7 @@ public class AuthService {
 			} else {
 				
 				System.out.println("Username or Password Does Not Exist!");
-				return 0;
+//				return 0;
 			}
 		} catch (Exception e) {
 			System.out.println("Login Unsuccessful");

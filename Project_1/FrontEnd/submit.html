@@ -13,7 +13,7 @@
     />
     <!--bootstrap classes cheatsheet-->
     <!--https://www.w3schools.com/bootstrap/bootstrap_ref_css_buttons.asp-->
-        <link href="./employee.CSS" rel="stylesheet" />
+        <link href="./submit.CSS" rel="stylesheet" />
 
 
         <link rel="icon" type="'image/x-icon" hre="assets\favicon.png">
@@ -52,7 +52,8 @@
                 <h2 id="display-title">Reimbursement Submission Form</h2>
 
               <div class="form-contrainer">
-                  <form id="display-form">
+              
+                <form id="display-form">
 
                         <div class="input-group-mb-3">
                             <label class="input-group-text" for="typeInput">Type</label>
@@ -67,38 +68,48 @@
                             </select>
                         </div>
 
-                        <label for="descrption" class="form-label">Description</label>
+                        <label for="description" class="form-label">Description</label>
+                       
                         <div class="input-group">
 
                                 <textarea class="form-control" id="description" placeholder="Explain the reason for your request..." aria-label="With textarea"></textarea>
                         </div>
 
                         <label for="descrption" class="form-label">Amount</label>
+                      
                         <div class="input-group-mb-3">
+                          
                             <span class="input-group-text">$</span>
+                           
                             <input type="number" class="form-control" id="amount" placeholder="e.g. 100.00" aria-label="Amount (to the nearest dollar)">
                         </div>
 
                         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
 
                             <div class="btn-group me-2" role="group" aria-label="First group">
+                               
                                 <button id="black-button" class="btn btn-outline-danger">
+                                
                                     <a id="back-anchor" href="employee.html">
                                                 Back
                                     </a>  
+                               
                                 </button>
                         </div>
 
                         <div class="btn-group me-2" role="group" aria-label="Second group">
 
                             <button type="Submit-button" class="btn btn-outline-primary">Submit</button>
+                      
                         </div>
+                   
                     </div>
-                        
+                       <div id="message" hidden>Something went wrong</div> 
                   </form>
-              </div>
+                </div>
             </div>
         </div>
-
     </body>
+    <script src="../FrontEnd/server-requests.js"></script>
+    <script src="./submit.js"></script>
 </html>

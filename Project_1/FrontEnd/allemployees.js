@@ -1,6 +1,7 @@
 const url = "http://localhost:3000/";
 // Your projects will replace localhost with your AWS endpoint
 
+document.getElementById("getEmployeeButton").addEventListener("click",getEmployees);
 document.getElementById("loginButton").addEventListener("click",loginFunction);
 
 
@@ -85,6 +86,5 @@ async function loginFunction(){
     else{
         document.getElementById("loginRow").innerText = "Login Failed, please refresh the page!";
     }
-
 
 }

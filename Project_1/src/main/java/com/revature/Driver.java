@@ -27,9 +27,8 @@ public class Driver {
 	}
 		
 		
-//		CLI_Menu_Service options = new CLI_Menu_Service();
-//		options.displayLoginMenu();
-//		options.displayMenu();
+	//CLI_Menu_Service options = new CLI_Menu_Service();
+	//options.displayLoginMenu();
 	
 	
 	//LEAVE IT JUST IN CASE
@@ -53,7 +52,9 @@ public class Driver {
 	    
 	    app.post("/submit", rc.handleSubmit);
 	    
-	    app.post("/process", rc.handleProcess);
+	    app.put("/approved", rc.handleApproved);
+	    
+	    app.put("/denied", rc.handleDenied);
 	    
 	    app.get("/author/{author}", rc.handleGetReimbursementByAuthor);
 	   

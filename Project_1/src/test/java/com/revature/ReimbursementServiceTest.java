@@ -136,7 +136,7 @@ public void testUpdateThrowsIllegalArgumentExceptionWhenResolverIsNotManager() {
 	when(userService.getUserById(anyInt())).thenReturn(GENERIC_EMPLOYEE_1);
 	
 	assertThrows(IllegalArgumentException.class,
-						() -> reimbursementService.update(REIMBURSEMENT_TO_PROCESS, GENERIC_EMPLOYEE_1.getId(), Status.Approved)
+						() -> reimbursementService.update(REIMBURSEMENT_TO_PROCESS)
 	);
 	
     verify(reimbursementDAO, never()).update(REIMBURSEMENT_TO_PROCESS);
@@ -149,7 +149,7 @@ public void testReimbursementStatusIsChangedAfterUpdate() {
 	
 	when(userService.getUserById(anyInt())).thenReturn(GENERIC_MANAGER_1);
 	
-	assertEquals(Status.Approved, reimbursementService.update(REIMBURSEMENT_TO_PROCESS, GENERIC_MANAGER_1.getId(),Status.Approved));
+	assertEquals(Status.Approved, reimbursementService.update(REIMBURSEMENT_TO_PROCESS));
 	
 	verify(userService).getUserById(GENERIC_EMPLOYEE_1.getId());
 	verify(reimbursementDAO).update(REIMBURSEMENT_TO_PROCESS);
@@ -162,7 +162,7 @@ public void testResolverIsAssignedAfterReimbursementUpdate() {
 	
 	when(userService.getUserById(anyInt())).thenReturn(GENERIC_MANAGER_1);
 	
-	assertEquals(GENERIC_MANAGER_1.getId(), reimbursementService.update(REIMBURSEMENT_TO_PROCESS, GENERIC_MANAGER_1.getId(),Status.Approved).getResolver());
+	assertEquals(GENERIC_MANAGER_1.getId(), reimbursementService.update(REIMBURSEMENT_TO_PROCESS));
 
 
 	verify(userService).getUserById(GENERIC_MANAGER_1.getId());

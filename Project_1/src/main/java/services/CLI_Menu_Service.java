@@ -112,7 +112,7 @@ public void handlePortal (Role role) {
 		ids[i] = users.get(i).getId();
 	}
 
-	//Ask for employee ID number to continue
+	
 	System.out.println("-------------------------------------------------------");
 	System.out.println("PLEASE ENTER THE NUMBER OF YOUR CHOICE");
 	
@@ -122,7 +122,7 @@ public void handlePortal (Role role) {
 	}
 	System.out.println("0 -> Return to Main Menu");
 	System.out.println();
-//	users.clear();
+
 	int userChoice = promptSelection(ids);
 	
 	if (userChoice == 0) {
@@ -316,7 +316,13 @@ public void displayPreviousRequests(User employee) {
 		System.out.println("Returning to Previous Menu...");
 	}
 	for (Reimbursement r : reimbursements) {
-		System.out.println(r);
+		System.out.println(r.getAuthor());
+		System.out.println(r.getId());
+		System.out.println(r.getAmount());
+		System.out.println(r.getStatus());
+		System.out.println(r.getDescription());
+		System.out.println(r.getResolver());
+		System.out.println(r.getType());
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -362,7 +368,7 @@ public void processReimbursement(User manager) {
 		
 		int decision = promptSelection(1, 2);
 		Status status = (decision == 1) ? Status.Approved : Status.Denied;
-		rService.update(reimbursementToBeProcessed, manager.getId(), status);
+		rService.update(reimbursementToBeProcessed);
 		
 		System.out.println("Would you like to process another reimbursement?");
 		System.out.println("PLEASE ENTER THE NUMBER OF YOUR CHOICE");
@@ -394,7 +400,7 @@ public void displayLoginMenu() {
 	   String username = scan.nextLine();
 	   System.out.println("Enter your password");
 	   String password = scan.nextLine();
-	   if (au.login(username, password)!= 1) {
+	   if (au.login(username, password)!= 0) {
 		   accountFound = true;
 		   displayMenu();
 		   break;
@@ -404,26 +410,26 @@ public void displayLoginMenu() {
 	   }
 	} 
 ////////////////////////////////////////////////////////////////////////////////////////
-public void displayRegisterMenu() {
-
-	AuthService au = new AuthService();
-	
-	
-	System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-	System.out.println("Welcome to the Registration Portal");
-	System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-	System.out.println();
-	
-	User userToBeRegistered = new User();
-	System.out.println("Please enter your username");
-	String username = scan.nextLine();
-	System.out.println("Please enter a password");
-	String password = scan.nextLine();
-	userToBeRegistered.setUsername(username);
-	userToBeRegistered.setPassword(password);
-	userToBeRegistered.setRole(Role.Employee);
-	au.register(userToBeRegistered);
-	displayLoginMenu();
-	
-	} 
+//public void displayRegisterMenu() {
+//
+//	AuthService au = new AuthService();
+//	
+//	
+//	System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+//	System.out.println("Welcome to the Registration Portal");
+//	System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+//	System.out.println();
+//	
+//	User userToBeRegistered = new User();
+//	System.out.println("Please enter your username");
+//	String username = scan.nextLine();
+//	System.out.println("Please enter a password");
+//	String password = scan.nextLine();
+//	userToBeRegistered.setUsername(username);
+//	userToBeRegistered.setPassword(password);
+//	userToBeRegistered.setRole(Role.Employee);
+//	au.register(userToBeRegistered);
+//	displayLoginMenu();
+//	
+//	} 
 }

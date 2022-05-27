@@ -44,7 +44,7 @@ button:hover {
 .cancelbtn {
   width: auto;
   padding: 10px 18px;
-  background-color: #b42419;
+  background-color: #ffe6e6b2;
 }
 
 .imgcontainer {
@@ -80,7 +80,7 @@ crossorigin="anonymous"
 <!--bootstrap classes cheatsheet-->
 <!--https://www.w3schools.com/bootstrap/bootstrap_ref_css_buttons.asp-->
 
-
+<script src="login.js"></script>
 
 <link rel="icon" type="'image/x-icon" hre="assets\favicon.png">
 
@@ -127,8 +127,17 @@ crossorigin="anonymous"
   
     </label>
   </div>
- 
-    <button type="button" class="cancelbtn"><font color="azure">Cancel</button>
-    <span class="psw">Forgot <a href="#">password?</a></span>
+  <div class="d-flex">
+
+    <button type="button" class="cancelbtn"><font color="azure">
+      <a id="register-anchor" href="./register.html">
+        Not a user? REGISTER
+      </a></button>
+    
+    </div>
+
+
+</script>
+    
 </body>
 </html>

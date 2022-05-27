@@ -22,21 +22,11 @@ public class ReimbursementService {
 		}
 
 
-public static Reimbursement update(Reimbursement unprocessedReimbursement, int resolverId, Status updatedStatus) {	
-
-		User manager = rService.getUserById(resolverId);
+public static Reimbursement update(Reimbursement unprocessedReimbursement) {	
 		
-		if(manager.getRole() != Role.Manager) {
-			throw new RuntimeException("There was an error processing this reimbursement, please try again.");
-		}else {
-			
-			unprocessedReimbursement.setResolver(resolverId);
-			unprocessedReimbursement.setStatus(updatedStatus);
-			
 			reimbursementDAO.update(unprocessedReimbursement);
-			
+
 			return unprocessedReimbursement;
-		}
 }
 			
 		
