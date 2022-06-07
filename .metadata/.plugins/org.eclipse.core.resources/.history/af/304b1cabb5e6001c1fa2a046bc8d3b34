@@ -80,7 +80,7 @@ try(Connection connection = ConnectionFactoryUtility.getConnection()){
 					+ "RETURNING ers_users.id";
 			
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			//System.out.println(user.getUsername());
+			System.out.println(user.getUsername());
 		
 			preparedStatement.setString(1, user.getUsername());
 			preparedStatement.setString(2, user.getPassword());

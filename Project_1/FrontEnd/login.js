@@ -11,7 +11,7 @@ async function login(){
     }
     
     console.log(user);
-    let response = await fetch("http://localhost:3000/login", {
+    let response = await fetch(url + "login", {
         method:"POST",
         body: JSON.stringify(user),
         credentials:"include"
