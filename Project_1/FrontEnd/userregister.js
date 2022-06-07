@@ -10,7 +10,7 @@ let userr = document.getElementById("typeInput").value;
 
 
 let user = {
-    "user" : usern,
+    "username" : usern,
     "password" : userp,
     "role" : userr
     

@@ -6,7 +6,7 @@ async function login(){
     let userp = document.getElementById("password").value;
 
     let user = {
-        username:usern,
+        user:usern,
         password:userp
     }
     
