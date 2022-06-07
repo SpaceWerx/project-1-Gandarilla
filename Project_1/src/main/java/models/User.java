@@ -2,7 +2,7 @@ package models;
 
 public class User {
 	private int Id;
-	private String user;
+	public String user;
 	private String password;
 	private Role role;
 	

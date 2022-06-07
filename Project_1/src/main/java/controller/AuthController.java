@@ -7,39 +7,31 @@ import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.javalin.http.HttpCode;
 import models.User;
+import repositories.UserDAO;
 import services.AuthService;
 
 public class AuthController {
-
+UserDAO userDAO = new UserDAO();
 ObjectMapper Mapper = new ObjectMapper();
-	public void handleRegister(Context ctx) {
+	
+	public Handler getRegisterHandler = (ctx) -> {
+		String body = ctx.body();
+		Gson gson = new Gson();
 		
-		try {
-			
-			String input = ctx.body();
-			
-			User user = Mapper.readValue(input, User.class);
-			
-			int id = AuthService.register(user);
-			
-			if(id == 0) {
-				
-				ctx.status(HttpCode.INTERNAL_SERVER_ERROR);
-				ctx.result("Registration unsuccessful.");
-			}
-			
-		} catch (Exception e) {
-			
-			ctx.status(HttpCode.INTERNAL_SERVER_ERROR);
-			
-			if(!e.getMessage().isEmpty()) {
-				ctx.result(e.getMessage());
-			}
-			
-			e.printStackTrace();
+		User user = gson.fromJson(body, User.class);
+		if(user!= null) {
+			userDAO.create(user);
+		
+			ctx.result("User successfully added");
+			ctx.status(201);
+		}else {
+			ctx.result("User not created");
+			ctx.status(400);
 		}
-
-	}
+	};
+	
+	
+	
 	AuthService as = new AuthService();
 	
 	public Handler loginHandler = (ctx) -> {

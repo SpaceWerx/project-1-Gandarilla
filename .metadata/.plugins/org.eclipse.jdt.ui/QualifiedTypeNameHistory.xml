@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="Models.Users"/>
+    <fullyQualifiedTypeName name="Models.Roles"/>
+    <fullyQualifiedTypeName name="javax.management.relation.Role"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="com.sun.tools.javac.util.List"/>
+    <fullyQualifiedTypeName name="services.ReimbursementService"/>
+    <fullyQualifiedTypeName name="models.ReimbursementType"/>
+    <fullyQualifiedTypeName name="models.ManagerMenu"/>
+    <fullyQualifiedTypeName name="models.EmployeeMenu"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.sql.Statement"/>
+    <fullyQualifiedTypeName name="utilities.ConnectionFactoryUtility"/>
+    <fullyQualifiedTypeName name="mockdata.MockUserData"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="mockdata.MockReimbursementData"/>
+    <fullyQualifiedTypeName name="java.awt.Window.Type"/>
+    <fullyQualifiedTypeName name="services.CLI_Menu_Service"/>
+    <fullyQualifiedTypeName name="services.AuthService"/>
+    <fullyQualifiedTypeName name="models.User"/>
+    <fullyQualifiedTypeName name="java.util.Objects"/>
+    <fullyQualifiedTypeName name="io.javalin.Javalin"/>
+    <fullyQualifiedTypeName name="controller.UserController"/>
+    <fullyQualifiedTypeName name="java.sql.SQLException"/>
+    <fullyQualifiedTypeName name="io.javalin.http.Context"/>
+    <fullyQualifiedTypeName name="io.javalin.http.HttpCode"/>
+    <fullyQualifiedTypeName name="models.Reimbursement"/>
+    <fullyQualifiedTypeName name="javax.net.ssl.SSLEngineResult.Status"/>
+    <fullyQualifiedTypeName name="controller.AuthController"/>
+    <fullyQualifiedTypeName name="io.javalin.core.JavalinConfig"/>
+    <fullyQualifiedTypeName name="services.UserService"/>
+    <fullyQualifiedTypeName name="models.Status"/>
+    <fullyQualifiedTypeName name="com.fasterxml.jackson.databind.ObjectMapper"/>
+    <fullyQualifiedTypeName name="java.nio.file.Paths"/>
+    <fullyQualifiedTypeName name="models.LoginDTO"/>
+    <fullyQualifiedTypeName name="models.Role"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="io.javalin.http.Handler"/>
+    <fullyQualifiedTypeName name="com.google.gson.Gson"/>
+    <fullyQualifiedTypeName name="repositories.ReimbursementDAO"/>
+    <fullyQualifiedTypeName name="controller.ReimbursementController"/>
+    <fullyQualifiedTypeName name="repositories.UserDAO"/>
+</qualifiedTypeNameHistroy>

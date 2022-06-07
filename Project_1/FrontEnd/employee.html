@@ -33,7 +33,7 @@
 
                             <button  type ="button" class="btn btn-outline-success">
 
-                                <a id="logout-anchor" href="login.html">
+                                <a id="logout-button" href="login.html">
                                         Logout              
                                 </a>
                             </button>
@@ -49,40 +49,44 @@
             </div>
 
             <div id="display">
-
                 <h2 id="display-title">Employee Portal</h2>
-
                 <div id="display-buttons">
-                    <button class="btn butn-outline-dark">
-                        <a id="submit-anchor" href="submit.html">
+                    <button class="btn btn-outline-dark">
+                        <a id="submit-anchor" href="./submit.html">
                             Submit Reimbursement
                         </a>
+                        <!--Take user to submit html page to fill out reimbursement info-->
                     </button>
-                </div>
+                    <br>
 
-                <table id="display-table" class="table table-striped">
-
+                </div >
+                <div id="tableRow" class="row">
+                <table id="display-table" class="table table-stripped">
                     <thead>
                         <tr>
-                            <tg scope="col">-ID--</tg>
-                            <tg scope="col">------Type------</tg>
-                            <tg scope="col">-----------------Description---------------</tg>
-                            <tg scope="col">-----------------------Amount--------------------</tg>
-                            <tg scope="col">-Status-</tg>
+                            <th >ID</th>
+                            <th >Type</th>
+                            <th >Description</th>
+                            <th >Amount</th>
+                            <th >Status</th>
                         </tr>
                     </thead>
-
-                    <tbody id="display-table-body">
+                    <tbody id="reimbursementbody">
                         
                     </tbody>
                 </table>
-            </div id="message" hidden>Something went wrong</div>
-            </div>
+                    <button id ="getreimbursements" class="btn btn-outline-dark">
+                        <a id="submit-anchor" >
+                            Show All Reimbursements
+                        </a>
+                    </button>
+                    <!--displays table of all users submited reimbursements-->
+                </div>
+                <div id="message" hidden>Something went wrong</div>
         </div>
-    </body>
-<script src="../server-requests.js"></script>
-<script src="./employee.js"></script>
-
+        <script src="employee.js"></script>
+        </body>
+        <script src="./server-requests.js"></script>
 
 
 

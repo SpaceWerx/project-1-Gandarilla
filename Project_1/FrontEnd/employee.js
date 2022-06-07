@@ -7,70 +7,42 @@ function logout() {
     window.location.href = "FrontEnd\login.html";
 }
 
-const authHeader = localStorage.getItem("current-user");
+document.getElementById("logout-button").addEventListener("click", logout);
 
-if(authHeader) {
+function logout() {
 
-    if(authHeader) {
+    localStorage.removeItem("current-user");
 
-        sendAjaxRequest("GET", 'http://localhost:3000/reimbursements?author=${authHeader}', null, tableRenderSuccess, tableRenderFailed, authHeader)
-    } else {
-        window.location.href =  "FrontEnd\login.html";
-    
-    }
-
-function tableRenderSuccess(xhr) {
-
-    const reimbursements = JSON.parse(xhr.responseText);
-
-    document.getElementById("display-table").hidden = false;
-
-    const tableBody = document.getElementById("display-table-body");
-
-    for (let reimbursement of reimbursements) {
-        
-        let newRow = document.createElement("tr");
-
-        let idColumn = document.createElement("td");
-
-        idColumn.innerText = reimbursement.id;
-
-        newRow.appendChild(idColumn);
-
-        let typeColumn = document.createElement("td");
-
-        typeColumn.innerText = reimbursement.type;
-
-        newRow.appendChild(typeColumn);
-
-        let descriptionColumn = document.createElement("td");
-        descriptionColumn.innerText = reimbursement.description;
-
-        newRow.appendChild(descriptionColumn);
-
-        let amountColumn = document.createElement("td");
-
-        amountColumn.innerText = reimbursement.amount;
-
-        newRow.appendChild(amountColumn);
-
-        let statusColumn = document.createElement("td");
-        
-        statusColumn.innerText = reimbursement.status;
-
-        newRow.appendChild(newRow);
-    
-    }
+    window.location.href = "FrontEnd\login.html";
 }
 
-function tableRenderFailed(xhr) {
-
-    const messageDiv = document.getElementById("message");
-
-    messageDiv.hidden = false;
-
-    messageDiv.innerText = xhr.responseText;
-}
-
-
+async function getreimbursmentsbyid(){
+    let response = await fetch("http://localhost:3000/reimbursement/{id}", { 
+        method:'GET',
+        credentials:"include"
+    });
+    console.log(response);
+    if(response.status ===200){
+        let data = await response.json();
+        console.log(data);
+        for(let reimbursement of data){
+            let row = document.createElement("tr");
+            let cell = document.createElement("td");
+            cell.innerHTML = reimbursement.id;
+            row.appendChild(cell); 
+            let cell2 = document.createElement("td");
+            cell2.innerHTML = reimbursement.type;
+            row.appendChild(cell2);
+            let cell3 = document.createElement("td");
+            cell3.innerHTML = reimbursement.description;
+            row.appendChild(cell3);
+            let cell4 = document.createElement("td");
+            cell4.innerHTML = reimbursement.amount;
+            row.appendChild(cell4);
+            let cell5 = document.createElement("td");
+            cell5.innerHTML = reimbursement.status;
+            row.appendChild(cell5);
+            document.getElementById("reimbursementbody").appendChild(row);
+        }
+    }
 }

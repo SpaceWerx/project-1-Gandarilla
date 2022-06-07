@@ -120,13 +120,12 @@ public Handler handleGetReimbursmentByStatus=(ctx) -> {
 		Gson gson = new Gson();
 		String json = gson.toJson(reim);
 		
-		//if(status == Status.Pending)
+	
 		if(reim != null) {
 			
 			ctx.result(json);
 			ctx.status(HttpCode.OK);
 		
-//			ctx.json(reimbursementService.getPendingReimbursements());
 		} else {
 			ctx.status(HttpCode.OK);
 			ctx.result(json);
@@ -146,7 +145,7 @@ public Handler handleGetReimbursementByAuthor = (ctx) ->{
 	ctx.result(JSONObject);
 };
 
-public Handler handleApproved = (ctx) ->{
+public Handler handleProcess = (ctx) ->{
 	 
 	String body = ctx.body();
 	Gson gson = new Gson();

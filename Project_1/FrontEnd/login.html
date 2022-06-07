@@ -80,7 +80,7 @@ crossorigin="anonymous"
 <!--bootstrap classes cheatsheet-->
 <!--https://www.w3schools.com/bootstrap/bootstrap_ref_css_buttons.asp-->
 
-<script src="login.js"></script>
+
 
 <link rel="icon" type="'image/x-icon" hre="assets\favicon.png">
 
@@ -115,13 +115,19 @@ crossorigin="anonymous"
   </div>
 
   <div class="container">
-    <label for="uname"><b><font color="azure">Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" required>
+    <label for="username" id="username"><b>>Username</b></label>
+    <input type="text" id="username" placeholder="Enter Username" name="username" required>
 
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
-        
-    <button type="submit">Login</button>
+    <label for="password" id="password"><b>Password</b></label>
+    <input type="password" id="password" placeholder="Enter password" name="password" required>
+      
+    
+
+    <button type="button" id="loginButton" class="btn btn-primary" >
+      <a id="login-anchor" >
+      Login
+      </a> 
+    </button>
     <label text>
       <input type="checkbox" checked="checked" name="remember"> Remember me
   
@@ -129,8 +135,8 @@ crossorigin="anonymous"
   </div>
   <div class="d-flex">
 
-    <button type="button" class="cancelbtn"><font color="azure">
-      <a id="register-anchor" href="./register.html">
+    <button type="button" class="cancelbtn">
+      <a id="register-anchor" href="./userregister.html">
         Not a user? REGISTER
       </a></button>
     
@@ -140,4 +146,5 @@ crossorigin="anonymous"
 </script>
     
 </body>
+<script src="login.js"></script>
 </html>

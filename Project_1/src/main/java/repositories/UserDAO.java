@@ -72,11 +72,11 @@ try(Connection connection = ConnectionFactoryUtility.getConnection()){
 	}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public static int create(User user) {
+	public int create(User user) {
 try(Connection connection = ConnectionFactoryUtility.getConnection()){
 			
 			String sql = "INSERT INTO ers_users (id, username, password, role)"
-					+ "VALUES ( default, ?, ?, ?::role)"
+					+ "VALUES (default, ?, ?, ?::role)"
 					+ "RETURNING ers_users.id";
 			
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);

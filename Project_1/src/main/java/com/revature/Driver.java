@@ -40,7 +40,10 @@ public class Driver {
 	
 		app.get("/employee", uc.getEmployeesHandler);
 	
-		app.post("/employee", uc.insertEmployeesHandler);
+		app.post("/insert", uc.insertEmployeesHandler);
+		
+		app.post("/register", ac.getRegisterHandler);
+		
 		
 	    app.post("/login", ac.loginHandler); 
 	    
@@ -52,7 +55,7 @@ public class Driver {
 	    
 	    app.post("/submit", rc.handleSubmit);
 	    
-	    app.put("/approved", rc.handleApproved);
+	    app.put("/process", rc.handleProcess);
 	    
 	    app.put("/denied", rc.handleDenied);
 	    

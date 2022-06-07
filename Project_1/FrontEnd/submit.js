@@ -14,4 +14,31 @@ function logout(){
     window.location.href = "../login/login.html";
 }
 
-document.getElementById("submit-form").addEventListener("submit", attemptSubmit);
+async function submitReimbursement(){
+
+    const reimtype = document.getElementById("typeInput").value;
+    const reimdescription = document.getElementById("description").value;
+    const reimamount = document.getElementById("amount").value;
+    let string, testStatus = "Pending";
+    
+    
+    let reimbursement = {
+        "id" : 0,
+        "author":0,
+        "resolver" : 0,
+        "type" : reimtype,
+        "description" : reimdescription,
+        "amount": reimamount,
+        "status": testStatus
+    };
+    
+    console.log(reimbursement);
+    let response = await fetch("http://localhost:3000/submit", {
+        method: "POST",
+        body: JSON.stringify(reimbursement),
+        credentials:"include"
+    });
+    console.log(response.status);
+    
+    }
+    

@@ -7,19 +7,20 @@ import repositories.UserDAO;
 
 public class AuthService {
 
-	public static int register(User userToBeRegistered) {
+	UserDAO userDAO = new UserDAO();
+	public int register(User userToBeRegistered) {
 		
 		if(UserDAO.getByUsername(userToBeRegistered.getUsername()) != null) {
 			
 			throw new NullPointerException("Username is already taken");
 		}
 	
-		return UserDAO.create(userToBeRegistered);
+		return userDAO.create(userToBeRegistered);
 	}
 	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public static int login(String username, String password) {
+	public int login(String username, String password) {
 		
 
 		
@@ -50,10 +51,10 @@ public class AuthService {
 		
 	}
 
-	public static Object login(int anyInt) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	public static Object login(int anyInt) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	public static Object update(String string) {
 		// TODO Auto-generated method stub
