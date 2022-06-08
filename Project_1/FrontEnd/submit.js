@@ -1,5 +1,4 @@
 document.getElementById("logout-button").addEventListener("click", logout);
-
 function logout() {
 
     localStorage.removeItem("current-user");
@@ -7,19 +6,14 @@ function logout() {
     window.location.href = "FrontEnd\login.html";
 }
 
-function logout(){
-
-    localStorage.removeItem("current-user");
-
-    window.location.href = "../login/login.html";
-}
+document.getElementById("submit-button").addEventListener("click", submitReimbursement);
 
 async function submitReimbursement(){
 
     const reimtype = document.getElementById("typeInput").value;
     const reimdescription = document.getElementById("description").value;
     const reimamount = document.getElementById("amount").value;
-    let string, testStatus = "Pending";
+    let string, Status = "Pending";
     
     
     let reimbursement = {
@@ -29,7 +23,7 @@ async function submitReimbursement(){
         "type" : reimtype,
         "description" : reimdescription,
         "amount": reimamount,
-        "status": testStatus
+        "status": Status
     };
     
     console.log(reimbursement);

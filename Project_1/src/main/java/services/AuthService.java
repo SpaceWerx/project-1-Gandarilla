@@ -10,7 +10,7 @@ public class AuthService {
 	UserDAO userDAO = new UserDAO();
 	public int register(User userToBeRegistered) {
 		
-		if(UserDAO.getByUsername(userToBeRegistered.getUsername()) != null) {
+		if(userDAO.getByUsername(userToBeRegistered.getUsername()) != null) {
 			
 			throw new NullPointerException("Username is already taken");
 		}
@@ -26,7 +26,7 @@ public class AuthService {
 		
 		try {
 			
-			User user = UserDAO.getByUsername(username);
+			User user = userDAO.getByUsername(username);
 			
 			if(user!=null && password.equals(user.getPassword()) && user.getRole()== Role.Manager) {
 				

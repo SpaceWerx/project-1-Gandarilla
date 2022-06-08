@@ -2,7 +2,6 @@ INDEX VERSION 1.131+D:\Alex_Repository\project-1-Gandarilla\.metadata\.plugins\o
 1264657321.index
 1586042327.index
 1040497645.index
-2171005544.index
 2446111925.index
 340356020.index
 596760989.index
@@ -11,7 +10,6 @@ INDEX VERSION 1.131+D:\Alex_Repository\project-1-Gandarilla\.metadata\.plugins\o
 1879713920.index
 2389160328.index
 1766631027.index
-1078345867.index
 1285536485.index
 3221286615.index
 944871686.index

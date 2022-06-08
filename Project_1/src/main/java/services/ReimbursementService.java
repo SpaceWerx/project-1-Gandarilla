@@ -22,12 +22,16 @@ public class ReimbursementService {
 		}
 
 
-public static Reimbursement update(Reimbursement unprocessedReimbursement) {	
+public Reimbursement update(Reimbursement unprocessedReimbursement) {	
 		
 			reimbursementDAO.update(unprocessedReimbursement);
 
 			return unprocessedReimbursement;
+
+	
+	
 }
+
 			
 		
 	
@@ -55,18 +59,19 @@ public static Reimbursement update(Reimbursement unprocessedReimbursement) {
 	
 /////////////////////////////////////////////////////////////////////////////		
 		
-	public static int submitReimbursement (Reimbursement reimbursementToBeSubmitted) {
+	public int submitReimbursement (Reimbursement reimbursementToBeSubmitted) {
 		
 
 	
 		User employee = rService.getUserById(reimbursementToBeSubmitted.getAuthor());
 	
 		
+		
 			reimbursementToBeSubmitted.setStatus(Status.Pending);
 			
 	
 			return reimbursementDAO.create(reimbursementToBeSubmitted);
-}
+	}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

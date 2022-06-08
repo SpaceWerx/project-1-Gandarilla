@@ -12,16 +12,17 @@ import services.UserService;
 
 public class UserController {
 	UserService us = new UserService();
+	User user;
 	
 
 	
-	public void handleGetUser (Context ctx) {
-		if(ctx.queryParam("Username") != null) {
-			handleGetByUsername(ctx);
-		} else if(ctx.queryParam("Id") != null) {
-			handleGetById(ctx);
-		}
-	}
+//	public void handleGetUser (Context ctx) {
+//		if(ctx.queryParam("Username") != null) {
+//			handleGetByUsername(ctx);
+//		} else if(ctx.queryParam("Id") != null) {
+//			handleGetById(ctx);
+//		}
+//	}
 
 	public Handler getEmployeesHandler = (ctx) ->{
 		
@@ -83,31 +84,17 @@ public class UserController {
 	
 	
 	
-	public void handleGetById(Context ctx) {
+	public Handler getUserByIdHandler = (ctx) ->{
+		String body = ctx.body();
 		
-		try {
-			String idParam = ctx.pathParam("id");
-			
-			int id = Integer.parseInt(idParam);
-			
-			User users = UserService.getUserById(id);
+		int id = Integer.parseInt(body);
+		user = us.getUserById(id);
+		Gson gson = new Gson();
+		String JSONObject = gson.toJson(user);
 		
-			if(users != null) {
-				ctx.status(HttpCode.OK);
-				ctx.json(users);
-			} else {
-				ctx.status(HttpCode.BAD_REQUEST);
-				ctx.result("Could not retrieve the User");
-			}
-			
-		} catch(Exception e){ 
-			ctx.status(HttpCode.INTERNAL_SERVER_ERROR);
-			
-			if(!e.getMessage().isEmpty()) {
-				ctx.result(e.getMessage());
-			}
-			e.printStackTrace();
-		}
+		ctx.result(JSONObject);
+		ctx.status(200);
+		
 	};
 	
 }

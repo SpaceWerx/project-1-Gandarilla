@@ -17,7 +17,7 @@ function logout() {
 }
 
 async function getreimbursmentsbyid(){
-    let response = await fetch("http://localhost:3000/reimbursement/{id}", { 
+    let response = await fetch("http://localhost:3000/reimbursement", { 
         method:'GET',
         credentials:"include"
     });

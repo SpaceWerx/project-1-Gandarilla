@@ -52,47 +52,47 @@ public class ReimbursementController {
 		}
 	}
 /////////////////////////////////////////////////////////////////////////////
-	public void handleProcess(Context ctx) {
-		
-		String authHeader = ctx.header("Current-User");
-		
-		if(authHeader != null) {
-			
-			int userId = Integer.parseInt(authHeader);
-			
-		try {
-			String reimbursementIdInput = ctx.pathParam("id");
-			
-			int id = Integer.parseInt(reimbursementIdInput);
-			
-			String statusInput = ctx.formParam("status");
-			
-			Reimbursement reimbursement = reimbursementService.getReimbursementById(id);
-			
-			if(reimbursement != null) {
-				
-				Reimbursement processedReimbursement = reimbursementService.update(reimbursement);
-				
-				ctx.status(HttpCode.ACCEPTED);
-				ctx.json(processedReimbursement);
-			
-			} else {
-				ctx.status(HttpCode.BAD_REQUEST);
-				ctx.result("Reimbursement processing was not successful");
-			}
-		} catch (Exception e) {
-			ctx.status(HttpCode.INTERNAL_SERVER_ERROR);
-			
-			if(!e.getMessage().isEmpty()) {
-				ctx.result(e.getMessage());
-	
-	} else {
-		ctx.status(HttpCode.FORBIDDEN);
-		ctx.result("Missing Current User Header with ID");
-			}
-		}
-	}
-}
+//	public void handleProcess(Context ctx) {
+//		
+//		String authHeader = ctx.header("Current-User");
+//		
+//		if(authHeader != null) {
+//			
+//			int userId = Integer.parseInt(authHeader);
+//			
+//		try {
+//			String reimbursementIdInput = ctx.pathParam("id");
+//			
+//			int id = Integer.parseInt(reimbursementIdInput);
+//			
+//			String statusInput = ctx.formParam("status");
+//			
+//			Reimbursement reimbursement = reimbursementService.getReimbursementById(id);
+//			
+//			if(reimbursement != null) {
+//				
+//				Reimbursement processedReimbursement = reimbursementService.update(reimbursement);
+//				
+//				ctx.status(HttpCode.ACCEPTED);
+//				ctx.json(processedReimbursement);
+//			
+//			} else {
+//				ctx.status(HttpCode.BAD_REQUEST);
+//				ctx.result("Reimbursement processing was not successful");
+//			}
+//		} catch (Exception e) {
+//			ctx.status(HttpCode.INTERNAL_SERVER_ERROR);
+//			
+//			if(!e.getMessage().isEmpty()) {
+//				ctx.result(e.getMessage());
+//	
+//	} else {
+//		ctx.status(HttpCode.FORBIDDEN);
+//		ctx.result("Missing Current User Header with ID");
+//			}
+//		}
+//	}
+//}
 //////////////////////////////////////////////////////////////////////////////////////////////////		
 public Handler handleGetReimbursements =(ctx) -> {
 		
@@ -149,10 +149,15 @@ public Handler handleProcess = (ctx) ->{
 	 
 	String body = ctx.body();
 	Gson gson = new Gson();
+	
 	Reimbursement reimbursement = gson.fromJson(body, Reimbursement.class);
-	int id = reimbursement.getResolver();
+	//int id = reimbursement.getResolver();
+	int id = reimbursement.getId();
+	int idd = AuthController.currentUser;
+	models.Status statusInput = reimbursement.getStatus();
+	
 
-	Reimbursement processedReimbursement = ReimbursementService.update(reimbursement); 
+	Reimbursement processedReimbursement = reimbursementService.update(reimbursement); 
 	if(processedReimbursement != null){
 	ctx.status(HttpCode.ACCEPTED);
 
@@ -165,47 +170,48 @@ public Handler handleProcess = (ctx) ->{
 
 };
 
-public Handler handleDenied = (ctx) ->{
-	 
-	String body = ctx.body();
-	Gson gson = new Gson();
-	Reimbursement reimbursement = gson.fromJson(body, Reimbursement.class);
-	int id = reimbursement.getResolver();
-
-	Reimbursement processedReimbursement = ReimbursementService.update(reimbursement); 
-	if(processedReimbursement != null){
-	ctx.status(HttpCode.ACCEPTED);
-
-
-	} else {
-			ctx.status(HttpCode.ACCEPTED);
-			ctx.result("Reimbursement processing was not successful");
-		}
+//public Handler handleDenied = (ctx) ->{
+//	 
+//	String body = ctx.body();
+//	Gson gson = new Gson();
+//	Reimbursement reimbursement = gson.fromJson(body, Reimbursement.class);
+//	int id = reimbursement.getResolver();
+//
+//	Reimbursement processedReimbursement = ReimbursementService.update(reimbursement); 
+//	if(processedReimbursement != null){
+//	ctx.status(HttpCode.ACCEPTED);
+//
+//
+//	} else {
+//			ctx.status(HttpCode.ACCEPTED);
+//			ctx.result("Reimbursement processing was not successful");
+//		}
 	
 
-};
+//};
 public Handler handleSubmit = (ctx) ->{
 	
-		String body = ctx.body();
-		Gson gson = new Gson();
-		
-		Reimbursement reimbursement = gson.fromJson(body, Reimbursement.class);
-		
-		ReimbursementService.update(reimbursement);
-		String JSONObject = gson.toJson("Reimbursement processed successfully!");
-		ctx.result(JSONObject);
-		ctx.status(208);
-		
-		int id = ReimbursementService.submitReimbursement(reimbursement);
-		
-		
-		if(id !=0) {
-			ctx.status(HttpCode.CREATED);
-			ctx.result("" + id);
-		} else {
-			ctx.status(HttpCode.BAD_REQUEST);
-			ctx.result("Reimbursement submission was unsuccessful");
-		}
+	String body = ctx.body();
+	Gson gson = new Gson();
+	
+	Reimbursement reimbursement = gson.fromJson(body, Reimbursement.class);
+	
+	reimbursementService.update(reimbursement);
+	String JSONObject = gson.toJson("Reimbursement processed successfully!");
+	ctx.result(JSONObject);
+	ctx.status(208);
+	
+	int id = reimbursementService.submitReimbursement(reimbursement);
+	
+	
+	if(id !=0) {
+		ctx.status(HttpCode.CREATED);
+		ctx.result("" + id);
+	} else {
+		ctx.status(HttpCode.BAD_REQUEST);
+		ctx.result("Reimbursement submission was unsuccessful");
+	}
+
 	
 };
 

@@ -57,7 +57,7 @@ public class Driver {
 	    
 	    app.put("/process", rc.handleProcess);
 	    
-	    app.put("/denied", rc.handleDenied);
+	    //app.put("/denied", rc.handleDenied);
 	    
 	    app.get("/author/{author}", rc.handleGetReimbursementByAuthor);
 	   

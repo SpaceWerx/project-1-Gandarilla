@@ -18,11 +18,11 @@ async function login(){
     });
     console.log(response.status);
     if(response.status === 201){
-        window.location.href="employee.html";
+        window.location.href="reimbursementportal.html";
         window.location.href;
     }
     if(response.status === 202){
-        window.location.href="reimbursementportal.html";
+        window.location.href="employee.html";
         window.location.href;
     }
     

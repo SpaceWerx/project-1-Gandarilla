@@ -63,7 +63,7 @@ let reimbursement = {
 };
 
 console.log(reimbursement);
-let response = await fetch("http://localhost:3000/process", {
+let response = await fetch("http://localhost:3000/approved", {
     method: "PUT",
     body: JSON.stringify(reimbursement),
     credentials:"include"

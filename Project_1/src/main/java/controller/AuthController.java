@@ -13,6 +13,9 @@ import services.AuthService;
 public class AuthController {
 UserDAO userDAO = new UserDAO();
 ObjectMapper Mapper = new ObjectMapper();
+User user = new User();
+public static int currentUser;
+User CurrentUser;
 	
 	public Handler getRegisterHandler = (ctx) -> {
 		String body = ctx.body();
@@ -41,6 +44,7 @@ ObjectMapper Mapper = new ObjectMapper();
 		//I recommend you make this an employee object 
 		User u = gson.fromJson(body, User.class);
 
+		CurrentUser = userDAO.getByUsername(user.getUsername());
 		if(as.login(u.getUsername(), u.getPassword()) == 1) {
 			ctx.status(201);
 			ctx.result("Manager Login Sucessful!");

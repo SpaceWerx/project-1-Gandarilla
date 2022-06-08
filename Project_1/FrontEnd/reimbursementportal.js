@@ -10,7 +10,7 @@ function logout() {
 document.getElementById("getreimbursements").addEventListener("click", getallreimbursements);
 
 async function getallreimbursements(){
-    let response = await fetch("http://localhost:3000/reimbursementservice", { 
+    let response = await fetch("http://localhost:3000/reimbursement", { 
         method:"GET",
         credentials:"omit"
         
