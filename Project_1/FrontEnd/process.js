@@ -23,25 +23,25 @@ async function getallreimbursements(){
             let row = document.createElement("tr");
             let cell = document.createElement("td");
             
-            cell.innerHTML = reimbursement.id;
+            cell.innerHTML = reimbursement.ID;
             row.appendChild(cell); 
             let cell2 = document.createElement("td");
-            cell2.innerHTML = reimbursement.author;
+            cell2.innerHTML = reimbursement.Author;
             row.appendChild(cell2);
             let cell3 = document.createElement("td");
-            cell3.innerHTML = reimbursement.resolver;
+            cell3.innerHTML = reimbursement.Resolver;
             row.appendChild(cell3);
             let cell4 = document.createElement("td");
-            cell4.innerHTML = reimbursement.type;
+            cell4.innerHTML = reimbursement.Type;
             row.appendChild(cell4);
             let cell5 = document.createElement("td");
-            cell5.innerHTML = reimbursement.description;
+            cell5.innerHTML = reimbursement.Description;
             row.appendChild(cell5);
             let cell6 = document.createElement("td");
-            cell6.innerHTML = reimbursement.status;
+            cell6.innerHTML = reimbursement.Status;
             row.appendChild(cell6);
             let cell7 = document.createElement("td");
-            cell7.innerHTML = reimbursement.amount;
+            cell7.innerHTML = reimbursement.Amount;
             row.appendChild(cell7);
             document.getElementById("reimbursementbody").appendChild(row);
         }

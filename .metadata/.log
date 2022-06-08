@@ -328,3 +328,21 @@ java.lang.NullPointerException: Cannot invoke "java.net.URI.toString()" because 
 
 !ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-07 18:04:30.131
 !MESSAGE executing callback sts4.classpath.GnErmBCZ SUCCESS [done]
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2022-06-07 18:12:34.852
+!MESSAGE Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2022-06-07 18:12:34.853
+!MESSAGE Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-07 20:45:31.918
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.GnErmBCZ
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-07 20:45:31.934
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.GnErmBCZ
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-07 20:45:31.949
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-07 20:45:31.950
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.GnErmBCZ => OK

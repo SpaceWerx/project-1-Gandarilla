@@ -17,14 +17,13 @@ async function submitReimbursement(){
     
     
     let reimbursement = {
-        "id" : 0,
-        "author":0,
-        "resolver" : 0,
-        "type" : reimtype,
-        "description" : reimdescription,
-        "amount": reimamount,
-        "status": Status
-    };
+        "Author":1,
+        "Type" : reimtype,
+        "Status": Status,
+        "Amount": reimamount,
+        "Resolver" : 0,
+        "Description" : reimdescription
+        };
     
     console.log(reimbursement);
     let response = await fetch("http://localhost:3000/submit", {

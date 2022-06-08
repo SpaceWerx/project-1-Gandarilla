@@ -33,7 +33,6 @@
     <fullyQualifiedTypeName name="controller.AuthController"/>
     <fullyQualifiedTypeName name="io.javalin.core.JavalinConfig"/>
     <fullyQualifiedTypeName name="services.UserService"/>
-    <fullyQualifiedTypeName name="models.Status"/>
     <fullyQualifiedTypeName name="com.fasterxml.jackson.databind.ObjectMapper"/>
     <fullyQualifiedTypeName name="java.nio.file.Paths"/>
     <fullyQualifiedTypeName name="models.LoginDTO"/>
@@ -44,4 +43,5 @@
     <fullyQualifiedTypeName name="repositories.ReimbursementDAO"/>
     <fullyQualifiedTypeName name="controller.ReimbursementController"/>
     <fullyQualifiedTypeName name="repositories.UserDAO"/>
+    <fullyQualifiedTypeName name="models.Status"/>
 </qualifiedTypeNameHistroy>
