@@ -36,13 +36,13 @@ To-do list:
 
 ## Getting Started
 You will need the following programs installed in your computer in oder to make this project run:
-### * Git
-### * Java
-### * Spring Tool Suite 4
-### * Maven
-### * PostgreSQL
-### * DBeaver
-### * Postman
+* ###  Git
+* ###  Java
+* ###  Spring Tool Suite 4
+* ###  Maven
+* ###  PostgreSQL
+* ###  DBeaver
+* ###  Postman
 
 ## Usage
 After installing my project, you will need to create a databse connection in DBeaver and Requests in Postman
